@@ -1,0 +1,857 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* Clipforge Reef background — matched to the first uploaded version */
+:root{
+  --bg:#E1F2F0;--panel:rgba(255,255,255,.84);--panel2:rgba(236,248,246,.90);
+  --line:#B7D6D2;--fg:#0A2229;--mute:#466A70;--accent:#C23B22;--accent-fg:#fff;
+  --ok:#0B6E4A;--okbg:#D8F2E4;--bad:#B42318;--badbg:#FDE3E0;
+  --glow1:#4FD1C5;--glow2:#FF9A76;--glow3:#6FA8FF;--dot:rgba(10,80,90,.16);--glowop:.55;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#051A1E;--panel:rgba(10,40,46,.84);--panel2:rgba(6,31,36,.90);
+  --line:#1B4B52;--fg:#E2F5F3;--mute:#8FB9BC;--accent:#FF8A65;--accent-fg:#210A03;
+  --ok:#5EE0A0;--okbg:#0F3A2A;--bad:#FF8A7D;--badbg:#46201C;
+  --glow1:#0FA3A3;--glow2:#E5543B;--glow3:#2B6FD6;--dot:rgba(120,220,215,.14);--glowop:.42;
+  color-scheme:dark;
+}
+.bgfx{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.bgfx i{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--glowop);will-change:transform}
+.bgfx i:nth-child(1){width:58vmax;height:58vmax;left:-18vmax;top:-20vmax;background:var(--glow1);animation:reefDrift1 26s ease-in-out infinite alternate}
+.bgfx i:nth-child(2){width:50vmax;height:50vmax;right:-16vmax;top:16vh;background:var(--glow2);animation:reefDrift2 32s ease-in-out infinite alternate}
+.bgfx i:nth-child(3){width:46vmax;height:46vmax;left:18vw;bottom:-24vmax;background:var(--glow3);animation:reefDrift3 38s ease-in-out infinite alternate}
+.bgfx:after{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--dot) 1px,transparent 1.5px);background-size:26px 26px;opacity:.5;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+@keyframes reefDrift1{to{transform:translate(14vmax,12vmax) scale(1.18)}}
+@keyframes reefDrift2{to{transform:translate(-16vmax,-8vmax) scale(.9)}}
+@keyframes reefDrift3{to{transform:translate(12vmax,-14vmax) scale(1.2)}}
+@media(prefers-reduced-motion:reduce){.bgfx i{animation:none}}
+.wrap{position:relative;z-index:1}
+body{background:var(--bg)!important;color:var(--fg)!important}
+.card,.card.flat{background:var(--panel)!important;border-color:var(--line)!important;color:var(--fg)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 12px 36px rgba(5,45,48,.10)!important}
+.hero{background:linear-gradient(120deg,var(--panel),var(--panel2))!important;border-color:var(--line)!important}
+.hero h1,.hero-copy p,.hero-meta,.hero-meta b{color:var(--fg)!important}
+.hero-copy p{opacity:.82}
+.eyebrow,.label{color:var(--accent)!important}
+.stat,.feature,.item,.setting{background:var(--panel2)!important;border-color:var(--line)!important;color:var(--fg)!important}
+.feature p,.stat span,.course-row p,.mute{color:var(--mute)!important}
+.course-row{border-color:var(--line)!important}
+.course-num{background:var(--panel2)!important;color:var(--accent)!important}
+.nav{background:transparent}
+.nav button{color:var(--mute)!important}
+.nav button:hover,.nav button[aria-current="page"]{background:var(--panel)!important;border-color:var(--line)!important;color:var(--fg)!important}
+.nav button[aria-current="page"]{box-shadow:inset 3px 0 var(--accent)!important}
+.btn{background:var(--accent)!important;color:var(--accent-fg)!important;box-shadow:0 7px 22px rgba(194,59,34,.16)!important}
+.btn.sec{background:var(--panel2)!important;color:var(--fg)!important;border-color:var(--line)!important;box-shadow:none!important}
+.btn.bad{background:var(--badbg)!important;color:var(--bad)!important}
+.banner{background:var(--panel2)!important;color:var(--fg)!important;border-color:var(--line)!important}
+.box,.msg.ai,.quiz button,.tabs button,.suggestion-row button{background:var(--panel2)!important;border-color:var(--line)!important;color:var(--fg)!important}
+.tabs button[aria-pressed=true]{background:var(--fg)!important;color:var(--bg)!important}
+input[type=text],input[type=email],input[type=number],input[type=password],textarea,select{background:var(--panel2)!important;border-color:var(--line)!important;color:var(--fg)!important}
+.video-frame{border-color:var(--line)!important}
+.video-caption span:first-child{color:#fff}
+#toast{background:var(--fg)!important;color:var(--bg)!important}
+body.motion-bg{background:var(--bg)!important;animation:none!important}
+@media(max-width:859px){.nav{background:color-mix(in srgb,var(--bg) 88%,transparent)!important;backdrop-filter:blur(14px)}}
+
+</style></head><body>
+<title>Clipforge Academy — The Creator Editing Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: left rail + content column on wide screens; rail becomes a scrolling tab row on phones.
+   Ground is deep forest green, the signal color is marigold, the highlight color is coral. */
+:root{
+  --bg:#EDF3EC; --panel:#FFFFFF; --panel2:#F4F8F2; --line:#C9D8CC;
+  --fg:#0F231C; --mute:#4E6A5E;
+  --accent:#B25A00; --accent-fg:#FFFFFF;
+  --own:#0B6296; --ownbg:#DCEFFB;
+  --ok:#0B6E4A; --okbg:#D8F2E4; --bad:#B42318; --badbg:#FDE3E0;
+  --display:'Unbounded','Arial Black',system-ui,sans-serif;
+  --body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1814; --panel:#112521; --panel2:#0D1F1B; --line:#23433B;
+    --fg:#E8F2EC; --mute:#8FB0A3;
+    --accent:#FFB224; --accent-fg:#1C1100;
+    --own:#6CC4FF; --ownbg:#0E2E44;
+    --ok:#5EE0A0; --okbg:#0F3A2A; --bad:#FF8A7D; --badbg:#46201C;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1814; --panel:#112521; --panel2:#0D1F1B; --line:#23433B;
+  --fg:#E8F2EC; --mute:#8FB0A3;
+  --accent:#FFB224; --accent-fg:#1C1100;
+  --own:#6CC4FF; --ownbg:#0E2E44;
+  --ok:#5EE0A0; --okbg:#0F3A2A; --bad:#FF8A7D; --badbg:#46201C;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);
+  padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:1.5rem} h2{font-size:1.15rem} h3{font-size:.95rem}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-block:20px 48px;display:grid;gap:18px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-style:normal;font-size:.95rem}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 11px;font-size:.78rem;font-weight:700;font-family:var(--mono);letter-spacing:.02em}
+.badge.sub{background:var(--okbg);color:var(--ok)}
+.badge.guest{background:var(--panel2);color:var(--mute);border:1px solid var(--line)}
+.shell{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:860px){.shell{grid-template-columns:200px minmax(0,1fr);align-items:start}}
+.nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+@media(min-width:860px){.nav{flex-direction:column;overflow:visible;position:sticky;top:16px}}
+.nav button{display:flex;align-items:center;gap:9px;white-space:nowrap;background:transparent;border:1px solid transparent;border-radius:10px;padding:9px 12px;font-weight:600;color:var(--mute)}
+.nav button:hover{background:var(--panel);color:var(--fg)}
+.nav button[aria-current="page"]{background:var(--panel);border-color:var(--line);color:var(--fg)}
+.main{display:grid;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.card.flat{background:var(--panel2)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row.sp{justify-content:space-between}
+.grid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.mute{color:var(--mute)} .small{font-size:.85rem} .mono{font-family:var(--mono)}
+.label{font:500 .7rem var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.btn{background:var(--accent);color:var(--accent-fg);border:0;border-radius:10px;padding:9px 15px;font-weight:700}
+.btn:hover{filter:brightness(1.06)}
+.btn.sec{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.sec:hover{background:var(--panel2)}
+.btn.bad{background:var(--badbg);color:var(--bad)}
+.btn.sm{padding:6px 11px;font-size:.84rem;border-radius:8px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font:500 .72rem var(--mono)}
+.pill.ok{background:var(--okbg);color:var(--ok)}
+.pill.bad{background:var(--badbg);color:var(--bad)}
+.pill.gold{background:var(--ownbg);color:var(--own)}
+.pill.mute{background:var(--panel2);color:var(--mute);border:1px solid var(--line)}
+input[type=text],textarea,select{width:100%;background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+textarea{min-height:120px;resize:vertical}
+.list{display:grid;gap:10px}
+.item{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--panel2)}
+.item>div{min-width:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 14px;font-weight:600;color:var(--mute)}
+.tabs button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.sw{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:0;font-weight:600}
+.sw b{width:38px;height:22px;border-radius:99px;background:var(--line);position:relative;transition:background .15s}
+.sw b::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--panel);transition:transform .15s}
+.sw[aria-checked="true"] b{background:var(--accent)}
+.sw[aria-checked="true"] b::after{transform:translateX(16px)}
+.chat{display:grid;gap:10px;max-height:52vh;overflow-y:auto;padding:4px}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;overflow-wrap:anywhere}
+.msg.ai{background:var(--panel2);border:1px solid var(--line);justify-self:start}
+.msg.me{background:var(--accent);color:var(--accent-fg);justify-self:end}
+.box{border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 10px 10px 0;padding:10px 14px}
+.box.as{border-color:var(--own)}
+.lock{display:grid;place-items:center;text-align:center;gap:10px;padding:30px 10px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:110px}
+.bars div{flex:1;background:var(--accent);border-radius:6px 6px 0 0;min-height:3px;position:relative}
+.bars div:last-child{background:var(--own)}
+.bars span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font:500 .66rem var(--mono);color:var(--mute)}
+.bars{margin-bottom:22px}
+.res{display:flex;gap:10px;align-items:center}
+.res svg{flex:none}
+.res.ok{color:var(--ok)} .res.no{color:var(--bad)}
+.quiz button{display:block;width:100%;text-align:left;margin-top:8px;border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:10px 12px}
+.quiz button.right{border-color:var(--ok);background:var(--okbg);color:var(--ok)}
+.quiz button.wrong{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.steps{margin:0;padding-left:20px;display:grid;gap:8px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.lead{font-size:1.05rem;line-height:1.7}
+.read p{line-height:1.75;max-width:72ch}
+.read .box{line-height:1.7}
+.read h2{font-size:1.05rem}
+dl.gl{display:grid;gap:10px;margin:0}
+dl.gl dt{font-weight:700}
+dl.gl dd{margin:2px 0 0;color:var(--mute)}
+.score{font:500 .8rem var(--mono);color:var(--mute)}
+
+/* ===== CLIPFORGE / CREATOR STUDIO REDESIGN ===== */
+:root{--bg:#101114;--panel:#191b20;--panel2:#20232a;--line:#343840;--fg:#f2f0eb;--mute:#a2a5ad;--accent:#ff704d;--accent-fg:#171311;--own:#c8b7ff;--ownbg:#2c263b;--ok:#7bd7ae;--okbg:#1b382d;--bad:#ff9288;--badbg:#412321;--display:'Unbounded','Arial Black',system-ui,sans-serif;--body:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;color-scheme:dark}
+:root[data-theme="dark"]{--bg:#101114;--panel:#191b20;--panel2:#20232a;--line:#343840;--fg:#f2f0eb;--mute:#a2a5ad;--accent:#ff704d;--accent-fg:#171311;--own:#c8b7ff;--ownbg:#2c263b;--ok:#7bd7ae;--okbg:#1b382d;--bad:#ff9288;--badbg:#412321}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at 78% -18%,rgba(255,112,77,.12),transparent 36%),var(--bg);color:var(--fg);font-size:14px;line-height:1.65}
+.wrap{max-width:1320px;padding:26px 24px 64px;gap:24px}.top{padding:5px 0 18px;border-bottom:1px solid var(--line);margin-bottom:2px}.brand{font-size:1rem;letter-spacing:-.04em}.brand i{width:38px;height:38px;border-radius:12px;background:var(--accent);box-shadow:0 8px 28px #ff704d35;font-size:1.1rem}.badge{font-size:.68rem;letter-spacing:.08em}.shell{grid-template-columns:218px minmax(0,1fr);gap:24px}@media(max-width:859px){.shell{grid-template-columns:1fr}.wrap{padding:16px 14px 42px}.nav{position:sticky;top:0;z-index:8;background:#101114ed;backdrop-filter:blur(14px);padding:8px 0}.nav button{font-size:.82rem}}
+.nav{gap:5px}.nav .sep{padding:17px 12px 5px;color:#777c87;font-size:.62rem}.nav button{border-radius:11px;padding:11px 13px;color:#a2a5ad;font-size:.88rem;transition:.2s}.nav button:hover{background:#252830;color:#fff}.nav button[aria-current="page"]{background:#292c34;border-color:#454954;color:#fff;box-shadow:inset 3px 0 var(--accent)}.nav button.own[aria-current="page"]{border-color:#61547c;box-shadow:inset 3px 0 var(--own)}
+.main{gap:18px}.card{background:linear-gradient(145deg,#1b1e24,#17191e);border:1px solid #343840;border-radius:19px;padding:23px;gap:15px;box-shadow:0 12px 36px #00000018}.card.flat{background:#17191e}.card h1{font-size:clamp(1.45rem,3vw,2.2rem);letter-spacing:-.055em}.card h2{font-size:1.13rem;letter-spacing:-.035em}.card h3{font-size:.95rem}.mute{color:var(--mute)}.label{font-size:.65rem;letter-spacing:.14em;color:#ff947b}.lead{font-size:1rem;color:#c5c6cb;max-width:66ch}.btn{background:var(--accent);color:#1a1513;border:1px solid transparent;border-radius:10px;padding:10px 16px;font-weight:800;box-shadow:0 7px 22px #ff704d22;transition:transform .18s,filter .18s}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn.sec{background:#24272e;border-color:#41454e;color:#f1f0ed;box-shadow:none}.btn.bad{background:var(--badbg);color:var(--bad)}.pill{font-size:.65rem;letter-spacing:.07em}.item{background:#20232a;border-color:#373b44;border-radius:13px}.item:hover{border-color:#ff8062;background:#262931}.grid2{gap:16px}.banner{background:#292438;color:#d9ccff;border:1px solid #504568;border-radius:13px}.banner .btn{background:#c8b7ff;color:#1b1722}.box{background:#24272e;border-left-color:var(--accent);line-height:1.75}.box.as{border-color:var(--own)}input[type=text],textarea,select{background:#111318;border-color:#393d46;color:var(--fg)}.tabs button{background:#20232a;border-color:#3b3f48;color:#b9bbc2}.tabs button[aria-pressed="true"]{background:#f2f0eb;color:#17181c;border-color:#f2f0eb}.msg.ai{background:#252830;border-color:#393d46}.msg.me{background:var(--accent);color:#171311}.quiz button{background:#20232a;border-color:#393d46}.quiz button:hover{border-color:var(--accent)}.bars div{background:var(--accent)}#toast{background:#f2f0eb;color:#17181c}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:28px;align-items:center;padding:clamp(22px,4vw,42px);overflow:hidden;position:relative;min-height:370px;background:linear-gradient(120deg,#1b1e24 0%,#202128 58%,#282027 100%)}.hero:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-130px;top:-160px;border:1px solid #ff806222;box-shadow:0 0 0 38px #ff80620a,0 0 0 78px #ff806207;pointer-events:none}.hero-copy{display:grid;gap:17px;position:relative;z-index:1}.eyebrow{font:500 .68rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#ff9278}.hero h1{font-size:clamp(2rem,4.8vw,3.6rem);line-height:1.13;letter-spacing:-.07em;max-width:680px}.hero h1 em{font-style:normal;color:var(--accent)}.hero-copy p{font-size:1rem;color:#b8bbc3;max-width:560px;line-height:1.8}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-meta{display:flex;gap:18px;flex-wrap:wrap;color:#9296a0;font-size:.76rem}.hero-meta b{color:#f2f0eb;font-weight:700}.video-frame{aspect-ratio:16/9;width:100%;border-radius:15px;overflow:hidden;position:relative;border:1px solid #55505a;background:linear-gradient(135deg,#2a2c33,#17191f 58%,#38251f);box-shadow:0 24px 55px #0008;z-index:1}.video-frame:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,#ff704d18 36%,transparent 70%),radial-gradient(circle at 70% 30%,#ff704d30,transparent 35%)}.video-grid{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:15px;opacity:.8}.video-grid span{border:1px solid #ffffff1c;border-radius:8px;background:linear-gradient(145deg,#ffffff0b,#00000018)}.video-center{position:absolute;inset:0;display:grid;place-items:center}.play{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#1a1513;font-size:1.3rem;box-shadow:0 0 0 10px #ff704d26}.video-caption{position:absolute;left:17px;right:17px;bottom:14px;display:flex;justify-content:space-between;gap:8px;color:#fff;font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.1em}.video-caption span:last-child{color:#ff9b83}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.stat{padding:16px;border:1px solid #353942;border-radius:13px;background:#20232a}.stat strong{display:block;font:700 1.5rem var(--display);letter-spacing:-.06em}.stat span{font-size:.72rem;color:#9ea2ac}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.feature{padding:17px;border:1px solid #363a43;border-radius:14px;background:#20232a;display:grid;gap:8px}.feature .glyph{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#3b2926;color:#ff9278;font-size:1rem}.feature p{font-size:.8rem;color:#a8abb4;line-height:1.7}.course-row{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #30343c}.course-row:last-child{border:0}.course-num{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#2b2e36;color:#ff9a81;font:500 .75rem var(--mono)}.course-row p{font-size:.76rem;color:#969aa4}.progress-track{height:5px;border-radius:10px;background:#343841;overflow:hidden}.progress-track i{display:block;height:100%;background:var(--accent);border-radius:10px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero h1{max-width:700px}.video-frame{max-width:680px}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.stat-grid{grid-template-columns:1fr 1fr}.feature-grid{grid-template-columns:1fr}.hero{padding:21px}.hero h1{font-size:2rem}.card{padding:17px;border-radius:15px}.course-row{grid-template-columns:36px 1fr}.course-row .pill{grid-column:2}.hero-meta{gap:10px}}
+
+
+/* Settings and personalization */
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.setting{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}
+.setting label,.setting strong{font-weight:700}.setting small{color:var(--mute)}
+.setting input,.setting select{min-width:0}
+.setting input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.settings-tabs{display:flex;flex-wrap:wrap;gap:7px}
+.settings-tabs button{border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--mute);padding:7px 12px;font:600 .82rem var(--body)}
+.settings-tabs button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.suggestion-row{display:flex;flex-wrap:wrap;gap:7px}
+.suggestion-row button{border:1px solid var(--line);background:var(--panel2);color:var(--fg);border-radius:99px;padding:7px 11px;font-size:.82rem}
+body.motion-bg{background:radial-gradient(ellipse at 15% 20%,rgba(255,112,77,.16),transparent 34%),radial-gradient(ellipse at 85% 80%,rgba(200,183,255,.11),transparent 35%),var(--bg);background-size:150% 150%;animation:ambientShift 18s ease-in-out infinite alternate}
+@keyframes ambientShift{from{background-position:0% 0%,100% 100%,center}to{background-position:100% 50%,0% 30%,center}}
+:root[data-theme="light"]{--bg:#f2f1ed;--panel:#fffefa;--panel2:#f4f1eb;--line:#ded8ce;--fg:#202329;--mute:#666b73;--accent:#c84e32;--accent-fg:#fff;--own:#6651a5;--ownbg:#eee9fa;--ok:#24744f;--okbg:#e2f3e9;--bad:#a9362d;--badbg:#fae7e4;color-scheme:light}
+:root[data-theme="system"]{color-scheme:light dark}
+@media(prefers-color-scheme:light){:root[data-theme="system"]{--bg:#f2f1ed;--panel:#fffefa;--panel2:#f4f1eb;--line:#ded8ce;--fg:#202329;--mute:#666b73;--accent:#c84e32;--accent-fg:#fff;--own:#6651a5;--ownbg:#eee9fa;--ok:#24744f;--okbg:#e2f3e9;--bad:#a9362d;--badbg:#fae7e4}}
+body.font-system{--body:system-ui,-apple-system,'Segoe UI',sans-serif;--display:system-ui,-apple-system,'Segoe UI',sans-serif}
+body.font-serif{--body:Georgia,'Times New Roman',serif;--display:Georgia,'Times New Roman',serif}
+body.font-mono{--body:'JetBrains Mono',monospace;--display:'JetBrains Mono',monospace}
+body.layout-compact .card{padding:13px;border-radius:11px}body.layout-compact .wrap{gap:15px}body.layout-compact .shell{gap:15px}
+body.text-small{font-size:13px}body.text-medium{font-size:14px}body.text-large{font-size:16px}body.text-xlarge{font-size:18px}
+@media(prefers-reduced-motion:reduce){body.motion-bg{animation:none}}
+
+</style>
+
+<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="wrap" id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var DAY=864e5, KEY="clipforge.platform team.v1";
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>")}
+var IC={crown:'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/>',book:'<path d="M4 5a2 2 0 012-2h13v17H6a2 2 0 00-2 2zM4 19a2 2 0 012-2h13"/>',home:'<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>',tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 000-6l1-1.7-2-2-1.7 1a1.7 1.7 0 00-6 0L9 5.3l-2 2 1 1.7a1.7 1.7 0 000 6l-1 1.7 2 2 1.7-1a1.7 1.7 0 006 0l1.7 1 2-2z"/>',check:'<path d="M5 12l5 5 9-10"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>'};
+function ic(n,s){s=s||18;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+
+/* ---------- lesson content ---------- */
+var LESSONS=[
+{id:"m1",title:"Clipping from zero",
+ intro:"This lesson takes you from knowing nothing to cutting, framing and exporting your first short clip from a long gameplay video. Read it slowly, do the assignments, and answer the questions at the end before you move on. You do not need to be good at editing yet. You only need to be willing to watch closely and practice.",
+ sections:[
+ {h:"What clipping is, and what it is not",
+  p:["Clipping means taking a long video, such as a 3-hour stream or a 40-minute gameplay recording, and pulling out one short moment that works on its own. The finished piece is usually 15 to 45 seconds long and is posted on TikTok, Instagram Reels or YouTube Shorts. A person who has never seen the original video should still understand it and feel something: surprise, laughter, tension or respect for a skill.",
+   "Clipping is not just cutting a random piece of video. A cut-out piece with no beginning and no ending feels confusing, and viewers leave in two seconds. A clip is a tiny story with a setup, some tension and a payoff. Your job is to find that tiny story hidden inside a long, mostly boring recording and present it cleanly.",
+   "Clipping is also not a guaranteed way to earn money. Some people build audiences or get paid by creators, and many people try for months with little result. Treat it as a skill you are building. The skill is real and useful: watching carefully, choosing well, editing quickly and communicating with the person whose content you are working with. That skill can lead to different opportunities, and nobody can promise you which one."],
+  ex:"Example: a streamer plays a GTA-style game for three hours. Most of it is driving, menus and chatting. At 1:42:10 he steals a car, a police helicopter appears, he drives off a pier and lands on a boat. That 25-second moment is the clip. The other two hours and 59 minutes are raw material."},
+ {h:"The anatomy of a good clip",
+  p:["Every strong short clip has four parts, even if the whole thing lasts only 20 seconds. First is the hook, the first one to two seconds, which gives the viewer a reason to stay. Second is the setup, which gives just enough context to understand what is going on. Third is the tension, the stretch where the viewer wonders what will happen. Fourth is the payoff, the moment that answers the question, whether it is a funny reaction, a big crash or a clever escape.",
+   "Beginners often put the payoff at the end and the hook nowhere. The video starts with the character walking, then driving, then something happens at second 19. By then the viewer has already swiped away. A better order is to show a tiny piece of the payoff or the stakes first, then rewind to the setup, then deliver the full payoff. Another good order is to start in the middle of the action and give context with a caption.",
+   "The last idea is the loop. On short-form platforms a video often replays automatically. If your ending connects naturally back to your beginning, people may watch a second time without noticing. You do not need to engineer this on day one, but keep it in mind when you choose where to end the clip."],
+  ol:["Hook: the first 1 to 2 seconds. Show the most surprising frame or say the most interesting line.","Setup: 3 to 8 seconds. Only the context the viewer needs.","Tension: the stretch where the outcome is unknown.","Payoff: the answer, such as the crash, the escape, the joke or the skill.","Ending: stop soon after the payoff. Do not let it fade out slowly."]},
+ {h:"Choosing what to clip: the moment hunt",
+  p:["Finding good moments is the most valuable clipping skill, and it is mostly pattern recognition. When you watch a long video, you are not watching for fun. You are scanning for signals. A signal is something that would make a stranger stop scrolling.",
+   "Six signals appear again and again. The first is surprise: something unexpected happens. The second is a strong reaction: the player shouts, laughs, goes silent or breaks something. The third is skill: a difficult move done well, such as a perfect drift or a one-shot kill. The fourth is chaos: many things go wrong at once. The fifth is a story: a mini-plot with a clear before and after. The sixth is a quotable line: a sentence people want to repeat or comment on.",
+   "In GTA-style games, strong moments include police chases that end in a funny way, physics glitches, near misses, stunts, wrong turns that become disasters, funny interactions with other players, and heists that fall apart. In other games the same signals show up as clutch plays, fails and unexpected endings.",
+   "While you watch, keep a simple notes file. Each time you feel a spike of interest, write the timestamp and one line about why. Do not edit yet. After the whole video, review your notes and rank the moments. Often your first instinct is right, but sometimes a moment you ignored becomes stronger when you see it again with a good hook."],
+  ul:["Surprise: the opposite of what you expected happened.","Reaction: the human response is the funniest part.","Skill: the viewer thinks, how did they do that?","Chaos: everything goes wrong in a fun way.","Story: a clear before and after in under 40 seconds.","Quotable line: a sentence that works as a caption by itself."],
+  ex:"Example notes file: 00:12:40 funny NPC reaction (reaction). 01:42:10 pier jump onto boat (surprise + chaos). 02:15:05 streamer says: I am never driving again (quotable). Ranking: pier jump first, quote second as a short text-led clip, NPC reaction third."},
+ {h:"Setting up for free",
+  p:["You do not need to spend money to begin. Use what you already have. For recording or downloading gameplay that you have permission to use, your phone or computer likely has a built-in screen recorder. For editing, CapCut has a free tier that covers cutting, captions, zooms and exporting. For organizing, a free Google Drive or a plain folder on your computer is enough.",
+   "Create a simple folder structure on day one. A good one has four folders: 1_Raw for original videos, 2_Notes for your timestamps, 3_Edits for projects in progress and 4_Finished for exported clips. Use clear names like 2026-11-17_streamerName_pierJump_v1. Clear names save a lot of time when you have dozens of files, and they make it easy to find proof of permission later.",
+   "Lastly, decide where you will watch your own work. The best place is your phone, because that is where your audience will watch. A clip that looks fine on a laptop can look wrong on a phone, with captions too small or important action hidden at the edge."],
+  l:["Screen recorder: built into most phones and computers.","Editor: CapCut free tier.","Storage: a folder structure or free cloud drive.","Notes: any notes app or a plain text file.","Test device: your own phone."]},
+ {h:"Your first cut, step by step",
+  p:["Now put it together. This is a full walkthrough you can follow with a short video. Do not worry if your first attempt looks rough. The goal of the first clip is to finish one, not to make it perfect. Finishing teaches you more than reading."],
+  ol:["Open your notes and pick the single strongest moment.","Create a new project in your editor and set the ratio to 9:16 (vertical).","Import the raw video and find the moment. Mark where the setup begins and where the payoff ends.","Trim to just that section. Aim for 15 to 40 seconds.","Cut out dead time: waiting, loading screens, walking with nothing happening.","Decide your hook. Either start on the most surprising frame, or place a short text hook over the first frame.","Add captions for any important speech, keeping 3 to 5 words on screen at a time.","Check the audio. Game sound and voice should both be clear. Lower any music so voices stay easy to hear.","Watch the whole clip on your phone with the sound off, then with the sound on.","Export at 1080p vertical and save it in 4_Finished with a clear file name."]},
+ {h:"Length, framing and the safe zone",
+  p:["Short-form platforms show buttons, usernames and captions over your video. If you put important action or text in those areas, viewers cannot see it. This is called the safe zone problem. A good habit is to keep key action and text away from the very top, the very bottom and the right edge where buttons appear.",
+   "Gameplay is usually recorded in wide format, 16:9. To fill a vertical frame you can crop into the action, or place the gameplay in the middle and use a blurred copy of it as the background above and below. Choose the approach that keeps the main action large enough to see. If the action is small, crop in and follow it with a gentle zoom.",
+   "For length, shorter is not always better. A clip should be exactly as long as the story needs. If the payoff happens at second 14, end at second 16, even if you planned for 30. If the story needs 35 seconds, make sure each second earns its place. Test yourself: could you remove any second without losing meaning? If yes, remove it."]},
+ {h:"A full worked example from start to finish",
+  p:["Here is the pier jump clip from the beginning, processed step by step so you can see the decisions. The raw footage shows the streamer stealing a car at 1:41:50, a helicopter spotting him at 1:42:00, a chase through a street, and the jump at 1:42:10 with a splash at 1:42:14. He yells and laughs for about 6 seconds.",
+   "Decision one is the hook. The strongest frame is the car in mid-air above the water. Put 1 second of that frame at the beginning with the text: He should not have done that. Decision two is the setup. Cut back to the helicopter spotting him and the chase starts, trimmed to 6 seconds of real action. Decision three is the payoff. Show the full jump and the splash, slowed slightly for 1 second for emphasis. Decision four is the reaction. Keep 3 seconds of the streamer laughing because the reaction is half the joke. Then stop.",
+   "Total length is about 24 seconds. The captions show only the important lines. The music from the game stays low. The first draft takes some time, but the second clip takes less, and by the tenth you will notice you are working much faster because you recognize the same decisions."],
+  ex:"Before: a 3-hour stream. After: a 24-second clip with a hook frame, a 6-second setup, a 1-second slow-motion payoff and a 3-second reaction."},
+ {h:"How to review your own clip",
+  p:["After you finish, review the clip like a stranger. Ask five questions. Did the first two seconds give a reason to stay? Could a new viewer understand what is happening? Was there any moment where nothing happened? Is the text readable on a phone? Does it end right after the payoff?",
+   "Then show it to one person who has not seen the original. Do not explain anything. Watch their face. If they smile or lean in, you did well. If they look confused, note exactly where. Their confusion is more valuable than their compliments.",
+   "Keep a simple log with the clip name, what you changed, and what you learned. After ten clips you will see patterns in your own mistakes, and fixing patterns is how you improve fast."]},
+ {h:"A weekly routine that is realistic",
+  p:["Consistency beats intensity. A beginner routine might be two sessions per week of about 90 minutes each. In session one you watch one long video, build the notes file and pick the best three moments. In session two you edit those three moments, export them and write a short log entry about what you learned.",
+   "Do not try to learn everything at once. For the first month, focus on only two things: choosing strong moments and putting a clear hook in the first two seconds. Everything else can come later. When these two skills feel automatic, move to captions, pacing and sound, which the next lesson covers."]}
+ ],
+ mistakes:["Starting the clip with slow walking or menus instead of the hook.","Choosing a moment that only makes sense if you watched the whole stream.","Keeping dead air because it feels like a pity to cut.","Putting text or action where platform buttons will cover it.","Ending long after the payoff so the clip fades into nothing.","Judging the clip on a laptop only, and never on a phone.","Editing before finishing the moment hunt, so you waste time on weak moments."],
+ gloss:[["Clip","A short video made from one moment of a longer video."],["Hook","The first 1 to 2 seconds designed to stop the viewer from swiping."],["Payoff","The moment that answers the tension, such as the crash or the joke."],["Dead air","Time in a video where nothing useful happens."],["9:16","The vertical video shape used by TikTok, Reels and Shorts."],["Safe zone","The part of the screen not covered by platform buttons and text."],["Raw footage","The original, unedited video."],["Loop","When the end of a clip connects to its start so replays feel natural."]],
+ assign:["Pick one 10-minute gameplay video that you have permission to use. Watch it once and write down at least 5 timestamps with a one-line reason each.","Rank your 5 moments from strongest to weakest and write why you placed the top one first.","Cut your top moment into a 15 to 40 second clip following the 10 steps above. Export it vertically.","Watch your clip on your phone with the sound off, then on. Write down 3 things you would change.","Show the clip to one person who has not seen the original and write down exactly where they looked confused or bored."],
+ quiz:[
+ {q:"Where should the most surprising moment or line go in a short clip?",o:["At the very end","In the first 1 to 2 seconds","Exactly in the middle"],a:1,why:"Viewers decide almost instantly whether to swipe. The hook has to come first, and the setup follows."},
+ {q:"Which is NOT one of the six signals for a good moment?",o:["Surprise","Skill","The video having a long intro"],a:2,why:"A long intro is the opposite of a signal. It is usually dead air you should cut."},
+ {q:"You finished the payoff at second 14 of your planned 30-second clip. What should you do?",o:["Add filler so it reaches 30 seconds","End shortly after the payoff","Repeat the clip twice"],a:1,why:"A clip should be as long as its story needs. Ending soon after the payoff keeps the pace tight."},
+ {q:"Why test your clip on a phone?",o:["Phones export faster","That is where most viewers watch, and it shows safe zone and text size problems","It improves video quality"],a:1,why:"Captions and action can look fine on a laptop and be unreadable or covered on a phone."},
+ {q:"What is the best way to learn from a first clip?",o:["Delete it and start again","Show a stranger without explaining and note where they get confused","Only ask friends who will praise it"],a:1,why:"Honest confusion shows you what to fix. Praise feels nice but teaches less."}
+ ]},
+
+{id:"m2",title:"Hooks, captions and retention in CapCut",
+ intro:"This lesson turns a rough clip into one that holds attention. You will learn what retention means, how to write hooks, how to cut dead air, how to caption properly, how to use zoom and sound, and how to read your own results. Everything here can be done in the free tier of CapCut, and the ideas work in any editor.",
+ sections:[
+ {h:"What retention is and why it matters",
+  p:["Retention is how much of your video people watch. If a 20-second clip is watched on average for 12 seconds, its average retention is 60 percent. Platforms tend to show videos more widely when viewers keep watching, so retention is one of the most useful numbers you can learn to read.",
+   "Think of a retention graph as a line that starts at 100 percent and falls as people leave. The biggest drop usually happens in the first two seconds. If you fix only one thing, fix the start. After that, look for smaller drops in the middle and make sure the ending does not drag.",
+   "No editor can force people to watch, and nobody can promise a result. What you can do is remove reasons to leave and add reasons to stay. Every technique in this lesson does one of those two things."]},
+ {h:"Getting started in CapCut",
+  p:["Open CapCut and start a new project. Import your raw clip and set the canvas ratio to 9:16. Check the frame rate matches your source, commonly 30 fps, so the motion looks smooth. Learn the five areas of the screen: the media panel where your files live, the preview where you watch, the timeline where you build, the tool panel for effects and text, and the export button.",
+   "The timeline is the heart of editing. Video sits on the main track. Text, stickers and sound effects go on separate tracks above or below. A good habit is to name or color your tracks so you always know where things are. Learn three keys first: split at the playhead, delete, and undo. With only these three you can already do most of what you need.",
+   "Before you edit, save a copy of your project and name it clearly. If you make a mistake, you can go back. Also turn on any autosave option so you never lose work after a crash."],
+  ul:["Media panel: your imported video, audio and images.","Preview: shows what viewers will see.","Timeline: where cuts, text and sound are arranged.","Tool panel: text, captions, effects, transitions, audio.","Export: saves the finished video to your device."]},
+ {h:"Writing hooks that work",
+  p:["A hook is the first thing a viewer sees or hears. It has one job: make a stranger curious enough to keep watching for the next few seconds. You can write the hook as on-screen text, as a spoken line, as the first image, or as a mix of all three.",
+   "Five reliable hook patterns exist. Result first shows the exciting outcome and then goes back to how it happened. Stakes tells the viewer what is at risk. Question asks something the viewer wants answered. Contrast sets up an expectation and then breaks it. Quote uses a surprising line from the video itself.",
+   "A good hook is specific and honest. If the hook promises something the clip does not deliver, people feel tricked and leave, and they remember that. Keep the hook short, usually under 8 words, and make it readable in under two seconds."],
+  ol:["Result first: He drove off a pier and lived. (Then show the chase.)","Stakes: One wrong turn and the heist is over.","Question: Can you escape 5 stars with a bicycle?","Contrast: Everyone thought this was an easy getaway.","Quote: I am never driving again. (Then show why.)"],
+  ex:"GTA-style example: the first frame shows the car in mid-air above the water with the text: He should not have done that. Two seconds later the clip cuts back to the helicopter spotting him, and the viewer wants to see how he got there."},
+ {h:"Cutting dead air and tightening pace",
+  p:["Dead air is any moment that gives the viewer no new information or feeling. It includes long pauses, repeated menu screens, walking with nothing happening, and slow starts. Cutting dead air is the quickest improvement you can make.",
+   "The basic tool is the jump cut. Split the clip where the useful part ends, delete the empty part, and join the useful parts together. If the cut feels abrupt, add a tiny zoom change or a sound effect to hide the jump. Many popular clips use many cuts on purpose, and viewers are used to it.",
+   "You can also change speed. Speed up a boring stretch such as a long drive to 2x or 4x, and slow down the key second of the payoff to give it weight. Do not overuse slow motion. One strong slow moment is much better than five weak ones.",
+   "A useful rule is that something should change every 2 to 3 seconds. A change can be a cut, a zoom, a new caption, a sound effect or an on-screen sticker. If nothing changes for five seconds, ask whether the clip needs that stretch."]},
+ {h:"Captions and subtitles that people can read",
+  p:["Many people watch with the sound off, so captions are essential, and they also help viewers who are deaf or hard of hearing. CapCut has an auto caption feature that listens to the audio and writes text onto the timeline. It is quick, but it makes mistakes, especially with slang, accents and loud game sound. Always read every line and fix the errors by hand.",
+   "Style matters more than most beginners think. Use a bold, simple font with strong contrast against the video. White text with a dark outline is readable on most backgrounds. Keep 3 to 5 words on screen at once and break lines at natural pauses. Highlight the key word in a different color to add energy, but use only one highlight color so it does not look messy.",
+   "Place captions in the safe zone, usually in the middle or lower-middle of the frame, away from the platform buttons. Check on your phone that the text is not covered by the username or description area."],
+  l:["Use auto captions, then correct every mistake.","Choose one bold font and keep it for all your clips.","Three to five words at a time, no long paragraphs.","One highlight color for emphasis.","Keep text inside the safe zone."]},
+ {h:"Zoom, motion and visual change",
+  p:["Movement helps the eye stay engaged. A slow zoom into the action draws attention to the important area. A quick punch-in zoom on a funny reaction adds emphasis. These effects are made with keyframes: you set a start size and an end size, and the editor fills in the movement between them.",
+   "To make a simple zoom, place the playhead at the start of the moment, add a keyframe at 100 percent size, move forward a second or two, and add another keyframe at 115 to 130 percent. Preview it. The movement should feel natural, not dizzying. Small is usually better.",
+   "You can also use stickers, arrows or circles to point at the important detail. If something small happens in a big scene, such as a tiny car in the distance, a circle or arrow helps the viewer see it. Use these tools to guide attention, not to cover the video."]},
+ {h:"Sound: game audio, voice and effects",
+  p:["Sound is half the experience. First make sure the voice and the main game sound are clear. If the streamer speaks over loud music, lower the music. Keep your final volume consistent from the start to the end of the clip so viewers do not need to adjust it.",
+   "Sound effects can add punch. A short whoosh on a cut, a small hit on a zoom, or a pop when a caption appears gives rhythm. Use them lightly. If every second has a sound effect, it becomes noise.",
+   "Be careful with music. Songs are usually protected by copyright, and a track that is fine in one place may not be allowed in another. Prefer the music and sound libraries offered by the platform or editor for the kind of account you have, read their terms, and keep a note of where each track came from. The next lessons cover permissions in more detail."]},
+ {h:"Exporting and preparing to post",
+  p:["When your edit is finished, export at 1080 by 1920 resolution, 30 fps, and a high-enough quality setting for clean text. Longer exports take more time, so be patient and do not close the app. After exporting, watch the whole file again on your phone before posting. Exports sometimes contain surprises such as a missing caption or a clipped frame.",
+   "Write a short description that fits the clip. It can include a few relevant words people may search for, but avoid stuffing it with unrelated tags. Posting at similar times each week helps you compare results more fairly, but the best time varies by audience, so test and watch your own numbers."]},
+ {h:"Reading your results and improving",
+  p:["After posting, check your analytics once a day for a few days. Look at views, average watch time, percentage watched and, if available, where viewers drop off. These numbers tell you what to change in the next clip. Do not judge yourself by a single clip. Look at a group of five to ten.",
+   "If many viewers leave in the first two seconds, improve your hook. If they leave in the middle, tighten the pace or cut a slow section. If they watch to the end but do not interact, maybe the ending needs a stronger payoff or a clearer call to follow.",
+   "Make one change at a time when you can. If you change the hook, the captions and the music at once, you will not know which change helped. Small, steady experiments teach you far more than random big changes."]}
+ ],
+ mistakes:["Trusting auto captions without reading them.","Using tiny text that disappears on a phone screen.","Adding effects on every second until the video feels noisy.","Using a hook that promises something the clip does not deliver.","Leaving loud music over the voice.","Changing five things at once and not knowing what worked.","Using copyrighted music without checking whether it is allowed."],
+ gloss:[["Retention","How much of a video viewers actually watch."],["Jump cut","A cut that removes the empty part between two useful moments."],["Keyframe","A marker that tells the editor a setting, such as size, at a certain moment."],["Auto captions","Text generated automatically from the audio. It needs manual fixing."],["Highlight word","A key word shown in a different color for emphasis."],["fps","Frames per second. Commonly 30 for short-form video."],["Average view duration","The average time viewers spend watching your video."],["Call to action","A short line asking the viewer to do something, such as follow."]],
+ assign:["Take the clip from lesson 1. Write 5 different hook lines using the 5 patterns in this lesson, then choose the best and explain why.","Remove all dead air from your clip. Write down how many seconds you removed.","Add auto captions, then correct every mistake. Choose one font and one highlight color.","Add one simple zoom with keyframes on the most important moment.","Export, post or save the clip, and compare it with your first version. Write 3 differences you notice."],
+ quiz:[
+ {q:"What does cutting dead air mainly improve?",o:["File size only","Retention","The game's difficulty"],a:1,why:"Dead air gives viewers a reason to leave. Cutting it keeps more of them watching."},
+ {q:"Which hook pattern shows the outcome first and then explains how it happened?",o:["Stakes","Result first","Quote"],a:1,why:"Result first opens with the exciting outcome and then goes back to the setup."},
+ {q:"What should you always do after using auto captions?",o:["Nothing, they are perfect","Read every line and fix mistakes","Delete all captions"],a:1,why:"Auto captions often misread slang, accents and loud game sound."},
+ {q:"Roughly how often should something visually change in a clip?",o:["Every 2 to 3 seconds","Only once at the start","Every 30 seconds"],a:0,why:"Regular small changes, such as a cut, zoom or caption, keep the eye engaged."},
+ {q:"You changed the hook, captions and music at the same time and views improved. What is the problem?",o:["There is no problem","You cannot tell which change helped","The platform made a mistake"],a:1,why:"Changing one thing at a time shows you what actually works."}
+ ]},
+
+{id:"m3",title:"Finding clients and getting paid",
+ intro:"This lesson shows you how to go from having a few clips to having real conversations with creators who might need your help. You will build a small portfolio, find creators, write messages, handle replies, agree on scope and price, deliver work and get paid in a safe and professional way. Nothing here is a promise of income. It is a method you can test with real people.",
+ sections:[
+ {h:"Who pays for clips, and why",
+  p:["Creators who record long videos, such as streams, podcasts and long gameplay sessions, often do not have time to turn them into short clips. Short clips help them reach new viewers, but cutting them takes hours. Some creators will pay another person to do that work. That is the opportunity: you save them time and you deliver results they are happy to post.",
+   "Not every creator needs or can afford a clipper. Many small creators have no budget at all. Some larger creators already have editors. The best prospects are creators who post long content regularly, have a growing audience, post few or no shorts, and seem to care about growth. You will test your guesses and learn from responses.",
+   "Always remember the buyer's point of view. They are not buying editing hours. They are buying shorts they can post that make their channel look good. Talk about outcomes, saved time and consistency."]},
+ {h:"Building a small portfolio",
+  p:["Before you contact anyone, make a portfolio of three clips. A portfolio is simply proof that you can do the work. It should be easy to open, quick to watch and clearly in the style you want to be hired for. If you want to do GTA-style gameplay clips, your three clips should be GTA-style gameplay clips.",
+   "Use footage you are allowed to use. Your own gameplay is safest. If you use someone else's footage, get written permission first. A portfolio built on footage you were not allowed to use can cause problems later. The next lesson covers permissions.",
+   "Put the three clips in one folder or one simple page, and give each a short title and a one-line description of what you did, such as cut from a 2-hour stream, added hook and captions. Make sure the link opens without needing to log in. Test it on a different device."],
+  l:["Three clips, same style as the work you want.","Footage you own or have written permission to use.","One shareable link that opens on a phone.","A one-line description under each clip.","Your name and a way to contact you."]},
+ {h:"Finding creators to contact",
+  p:["Make a list of 20 creators. Search on the platforms you use for the kind of content you like. Look for creators with a few thousand followers up to a medium-sized audience, who post long videos regularly. Check whether they post shorts. Check whether their long videos contain good moments you could clip.",
+   "Create a simple tracking sheet with these columns: name, platform, link, why they are a good fit, one specific moment you noticed, date you contacted them, reply status and next step. This sheet is your pipeline. Without it you will forget who you contacted and when to follow up.",
+   "Avoid contacting people in ways that feel invasive. Use the contact method they present publicly, such as a business email in their profile or a business inbox. If their page says no unsolicited messages, respect that."]},
+ {h:"Studying a creator before you message",
+  p:["The difference between a message that gets ignored and one that gets a reply is specificity. Spend 15 minutes watching one recent long video from the creator. Write down two or three specific moments that would make good shorts. Note the timestamps. Make one sample clip from one moment if you can.",
+   "This effort is small compared to the number of generic messages you could send, and it works better. A creator can tell right away whether you looked at their content or just copied and pasted. When you mention a real moment, you prove you paid attention."]},
+ {h:"Writing the first message",
+  p:["A strong first message is short, specific and easy to answer. It has four parts: a greeting using their name, one specific observation about their content, a sample or offer, and one easy question. It should be readable in under 20 seconds. Do not attach a long biography or a list of prices in the first message.",
+   "Adapt the style to the platform. WhatsApp and Instagram messages are more casual and shorter. Email can be slightly more formal with a clear subject line. Always be polite and never pushy."],
+  ex:"WhatsApp: Hi Tolu, I watched your last stream. The moment at 41:10 when the car lands on the boat would make a great short. I made a 20-second sample here: [link]. Would you like me to cut 5 more from that stream?\n\nInstagram DM: Hey Ada, love your GTA streams. The pier jump at 1:42 is a perfect short. I put together a quick version: [link]. Is this something you would want more of?\n\nEmail subject: A 20-second short from your last stream. Body: Hello Tunde, I watched your latest stream and clipped the moment at 58:20 into a short. Here is the link. If you like it, I can send a few more as a trial. Thank you for your time."},
+ {h:"Following up without being annoying",
+  p:["Many creators are busy and miss messages. A polite follow-up is normal and professional. Wait three to four days after the first message, then send one short reminder. If there is still no reply after another five to seven days, send one final note and then move on. Three messages in total is plenty.",
+   "A follow-up should add something, not just repeat the question. For example, send a second sample clip, or mention a new moment from their latest video. Keep the tone friendly and make it easy for them to say no."],
+  ex:"Follow-up: Hi Tolu, just a quick follow-up. I saw your new stream and the moment at 12:05 would also work well as a short. Here is a version: [link]. No pressure at all, and thanks for taking a look.\n\nFinal note: Hi Tolu, I will not keep messaging you. If you ever need help turning streams into shorts, I would be glad to help. All the best with the channel."},
+ {h:"Handling replies: realistic conversations",
+  p:["When someone replies, respond quickly and clearly. Here are three common situations. In each, notice how the answers are friendly, short and move the conversation forward."],
+  ex:"Situation 1: they are interested.\nCreator: Hey, this looks good. What do you charge?\nYou: Thank you! It depends on how many clips and how fast you need them. Could you tell me roughly how many shorts you want per week and which videos to use? Then I can send a clear offer today.\n\nSituation 2: they have no budget.\nCreator: I like it but I cannot pay right now.\nYou: Totally understand. If you like, I can do one trial clip at no charge so you can see the results, and we can talk again after that.\n(Only offer a free trial if you are happy to give it, and limit it to one clip.)\n\nSituation 3: they say no.\nCreator: Thanks, but I already have an editor.\nYou: No problem, thank you for letting me know. If anything changes, I am happy to help. Good luck with the channel."},
+ {h:"Pricing basics and packages",
+  p:["Pricing is hard at the start, and there is no single correct answer. Begin by deciding what one unit of work is. For example, one short clip of up to 45 seconds with a hook and captions. Estimate how long it takes you, including revisions. Decide the lowest price you would be happy to accept for that time. Then check what other beginners charge in your market to see whether your price is realistic.",
+   "Packages make it easier for clients to say yes. A package might be 5 clips for one price, delivered in one week, with one round of revisions. Offering two or three options lets the client choose, and most choose the middle one. Always describe exactly what is included.",
+   "You may raise prices as your skill and results improve. Do not apologize for your price, and do not drop it immediately when someone pushes back. If the budget is lower, reduce the scope, such as fewer clips, instead of working for much less."],
+  ul:["Define one unit: one short clip up to 45 seconds.","State what is included: hook, captions, one revision.","State the delivery time.","Offer two or three package sizes.","Never promise views, followers or income to the client."]},
+ {h:"Agreeing scope and taking a deposit",
+  p:["Before you start, confirm the details in writing. Even a simple message on WhatsApp counts as a record. The details you should agree on are the number of clips, the video or videos they come from, the style, the deadline, the number of revisions, the price and the payment terms.",
+   "Ask for a deposit before starting, commonly 30 to 50 percent. A deposit protects your time and shows the client is serious. Explain it politely: I start work once the deposit is received, and the rest is due on delivery. Many professionals work this way.",
+   "If you are new and the client hesitates, you can reduce the risk by starting with a small first job, such as 2 or 3 clips. When the first job goes well, trust grows and bigger jobs follow."],
+  ex:"You: Great, here is what I understand. 10 clips from your next two streams, up to 45 seconds each, with hooks and captions, delivered within 5 days of getting the videos, one round of revisions. Price: [amount]. I start after a 50 percent deposit, and the rest is due when you approve the clips. Does that work for you?"},
+ {h:"Delivering work and handling revisions",
+  p:["Deliver in the way the client prefers, usually through a shared folder link or file transfer. Name files clearly, check that links open, and send a short message listing what is included. Ask for feedback within a set time.",
+   "Revisions are normal. A revision means changing the work to match what was agreed, such as fixing a caption or trimming a second. It does not mean a complete redo of everything because the client changed their mind. That is why the number of revisions is in the scope. When feedback arrives, thank them, repeat back what you will change, and deliver the changes by the promised time.",
+   "If a client asks for much more than agreed, stay polite and offer an option: That sounds like a new set of clips. I can quote that as an extra package, if you like."]},
+ {h:"Getting paid safely",
+  p:["Use payment methods that give both sides a record, such as bank transfer or a recognized payment service available in your country. Keep screenshots or receipts. Send a simple invoice with the date, your name, the client's name, what the payment covers and the amount.",
+   "Do not hand over final files for a large job without payment or a clear arrangement. Be cautious of anyone who asks you to pay money first, who sends a payment larger than the agreed amount and asks for a refund of the difference, or who pressures you to move to an unknown platform. These are common warning signs of scams. If something feels wrong, pause and check.",
+   "Rules about taxes and business registration differ by country. Look up the rules where you live, and consider asking a qualified local professional if your income grows."]},
+ {h:"Staying professional and building long-term trust",
+  p:["Reliability is your biggest advantage. Reply within a day. Meet deadlines, or warn early if you will be late. Keep your promises small and your delivery steady. Clients who trust you will recommend you.",
+   "Ask satisfied clients for a short testimonial and permission to show your work in your portfolio. Keep working on your skills. As you gain experience you can offer more, such as managing a creator's whole short-form schedule or writing hooks, but only after you are consistently good at the basics."]}
+ ],
+ mistakes:["Sending the same generic message to hundreds of people.","Starting work with no agreement on price, scope or deadline.","Skipping the deposit because the client seems friendly.","Dropping your price immediately when someone pushes back.","Promising views, followers or income to a client.","Not tracking who you contacted and when to follow up.","Using footage you do not have permission to use in your portfolio."],
+ gloss:[["Portfolio","A small set of your best work shown as proof of skill."],["Pipeline","Your list of creators and where each one is in the conversation."],["Scope","The exact work, quantity, deadline and revisions agreed."],["Deposit","Part of the payment made before work starts."],["Revision","A change to finished work to match what was agreed."],["Package","A bundle of work sold together at one price."],["Testimonial","A short statement from a happy client about working with you."],["Invoice","A document requesting payment for work done."]],
+ assign:["Build a 3-clip portfolio folder with a link that opens on a phone. Test it on another device.","Make a list of 20 creators in a sheet with the columns described in this lesson.","Pick 3 creators and watch one long video from each. Write down 2 specific moments with timestamps for each.","Write 3 first messages, one for WhatsApp, one for Instagram and one for email, each mentioning a real moment.","Write a package offer with one unit of work, what is included, the delivery time and your payment terms, ready to paste into a chat."],
+ quiz:[
+ {q:"What makes a first message more likely to get a reply?",o:["It is very long and detailed","It mentions a specific moment from the creator's content","It lists every service you offer"],a:1,why:"Specific details prove you paid attention and make the message feel personal."},
+ {q:"What should be agreed before you start paid work?",o:["Nothing, to stay flexible","Number of clips, deadline, revisions, price and payment terms","Only the price"],a:1,why:"Clear scope prevents disagreements later. A deposit shows both sides are serious."},
+ {q:"A client says your price is too high. What is a good first response?",o:["Cut the price in half immediately","Ask about their budget and offer a smaller scope","Stop replying"],a:1,why:"Adjusting scope keeps your rate and still gives the client a way to say yes."},
+ {q:"How many follow-up messages are reasonable?",o:["One to two polite ones, then move on","Ten, daily","None ever"],a:0,why:"A couple of polite reminders are professional. After that, respect their silence."},
+ {q:"Which is a warning sign of a payment scam?",o:["A client who pays the agreed deposit by bank transfer","A client who overpays and asks you to refund the difference","A client who asks for an invoice"],a:1,why:"Overpayment with a refund request is a common scam pattern. Verify and pause."}
+ ]},
+
+{id:"m4",title:"Copyright and platform rules",
+ intro:"This lesson explains, in plain language, why copyright and platform rules matter for clippers, who owns what in gameplay content, how to get and record permission, and how to work in a way that lowers your risk. It is general education and not legal advice. Laws differ by country and situation, so when money or a serious dispute is involved, ask a qualified professional where you live.",
+ sections:[
+ {h:"Why this matters before anything else",
+  p:["Clipping depends on other people's footage. That means you are working with content that someone else made and owns or controls. If you ignore the rules, the possible results include removed videos, muted audio, warnings or strikes on your account, lost accounts and, in serious cases, legal claims. Beginners often learn about these rules only after a problem. You can learn them now.",
+   "Understanding the rules does not make you timid. It makes you reliable. Creators are more willing to work with someone who respects their content, and clients prefer a clipper who can explain where footage and music come from."]},
+ {h:"Who owns what in a gameplay video",
+  p:["A gameplay video is a layered thing, and different people may have rights in different layers. The game itself belongs to its developer or publisher, including its artwork, characters, music and sounds. The streamer or creator owns what they added, such as their voice, commentary, facecam and the way they edited the video. The music in the background may belong to a musician or label. Other players' voices may also be in the recording.",
+   "This is why a single clip can involve several rights at once. Even if a creator says you can clip their stream, that permission usually covers only what they have the right to give. It does not automatically cover copyrighted songs playing in the background. Keep this layered view in mind whenever you pick footage."],
+  ol:["The game: owned by the developer or publisher, usually with a published content policy.","The creator's contribution: voice, face, commentary and editing.","Music and sound: may belong to artists, labels or sound libraries.","Other people in the video: other players, guests or viewers.","Your contribution: your edit, hook, captions and structure."]},
+ {h:"Permission: the strongest protection you can have",
+  p:["The safest way to use someone's footage is to have clear permission from the creator, in writing. Writing can be a message on WhatsApp, an email or a short agreement. What matters is that it clearly says what you are allowed to do. Verbal permission is hard to prove.",
+   "A good permission message says which videos or streams you may use, where you may post the clips, whether you may monetize them, whether you must credit the creator, and how long the permission lasts. If you do the work for the creator and they post the clips on their own accounts, the rules are different from when you post the clips on your own account, so be clear about which one you are doing."],
+  ex:"You: Hi Tolu, before I start I want to make sure we are clear. May I clip your streams from this month and post the shorts on your TikTok and YouTube accounts?\nCreator: Yes, go ahead. Post them on my accounts. Tag me in the caption.\nYou: Perfect. I will save this message as our agreement. If anything changes, I will let you know.\n\nAfter this, take a screenshot with the date visible and save it in the same folder as the clips."},
+ {h:"Game publisher content policies",
+  p:["Many game publishers publish a content policy or fan content guidelines that explain what players and creators may do with videos of the game. Some allow gameplay videos and streams, including monetization, as long as certain conditions are met. Some restrict certain content, such as leaked material or misuse of logos. Policies can change, and they can differ between games and between regions.",
+   "Find the official policy by searching the game's name plus words like content policy or fan content guidelines on the publisher's own website. Read it fully. Write down in your own words the rules that matter to you, such as monetization, use of music, and any required notices. Save the link and the date you read it."],
+  l:["Search for the publisher's official page, not a third-party summary.","Read the whole policy, not just the headline.","Write the key rules in your own words.","Save the link and the date you checked.","Check again from time to time because policies can change."]},
+ {h:"Platform rules for short videos",
+  p:["Each platform has its own rules about reused content, music, spam and monetization. Many platforms prefer content that adds something original rather than simply re-uploading someone else's video unchanged. Your edit, your hook, your captions and your commentary can add value, but you must still follow the rules about the underlying footage.",
+   "Read the community guidelines and the rules for monetization on every platform where you post. Pay attention to sections about reused or unoriginal content, copyrighted music and what happens after repeated violations. If you manage accounts for a creator, tell them about relevant rules so you both know what to expect."]},
+ {h:"Music and sound effects",
+  p:["Music causes many of the problems people run into. A song may be allowed in one place and not in another, and permission to use a song in a personal video may not cover use in a video that is monetized or used for business.",
+   "The safer path is to use music and sound effects from libraries provided by the platform or editor for your type of account, or from sources that state clearly how you may use them. Keep notes on where each sound came from and what the terms say. If you are unsure, remove the song and use something you can confirm."]},
+ {h:"Common myths that cause trouble",
+  p:["Several myths sound convincing but can lead to problems. The first is that giving credit makes anything allowed. Credit is polite, but it does not replace permission. The second is that a clip under a certain number of seconds is always safe. No fixed length makes use automatically allowed. The third is that if others are posting it, it must be fine. Other people may simply not have been caught or may have permission you do not know about.",
+   "Another myth is that fair use is a simple permission. Fair use is a legal idea in some countries, and it depends on the facts, such as the purpose, the amount used and the effect on the original. It is decided case by case. You should not build a business on guessing that something counts as fair use. When in doubt, get permission."],
+  ul:["Credit does not replace permission.","There is no magic length that makes any clip safe.","Other people posting something is not proof it is allowed.","Fair use is not a simple permission and depends on the country and the facts.","If you are unsure, ask or choose different footage."]},
+ {h:"What to do if you receive a claim or strike",
+  p:["Even careful people may receive a notice. Stay calm. Read the notice fully to see what is being claimed and by whom. Check your records: do you have permission, a policy that allows your use, or a license for the music? If you believe the claim is a mistake and you have proof, you may be able to dispute it through the platform's process, but be honest, because false statements can make things worse.",
+   "If the claim is correct, you may need to remove or edit the video. Learn from it by updating your checklist. If the situation is serious or involves a legal letter, stop and seek advice from a qualified professional. Do not ignore deadlines in a notice."]},
+ {h:"Keeping records",
+  p:["Records make all of the above easier. Keep a simple document or sheet for each project with the creator's name, the date of permission, a screenshot of the permission message, the link to the video, the game policy link and date you checked it, and the source of any music.",
+   "Store this in the same cloud folder or drive as your clips. If anyone asks about a clip, you can answer in minutes with proof. This habit looks professional and protects both you and the creator."]},
+ {h:"A safe workflow you can follow every time",
+  p:["Turn everything above into a checklist you use before you start and before you post. It takes a few minutes and prevents most beginner problems. Over time it becomes automatic."],
+  ol:["Whose footage is this? Do I have written permission?","What did they allow: which videos, which platforms, monetization, credit?","Does the game publisher's content policy allow this use? Link and date saved.","Is any music or sound in the video something I may use?","Do the platform rules allow this kind of content on my account?","Is everything saved in my project record?","If any answer is no or unsure, fix it or choose different footage."]}
+ ],
+ mistakes:["Starting a project with only a verbal OK.","Assuming that giving credit equals permission.","Leaving copyrighted music in the clip because it sounds good.","Believing a short length makes a clip automatically safe.","Not saving screenshots and links as proof.","Reading a summary of a policy instead of the publisher's own page.","Ignoring a platform notice and its deadline."],
+ gloss:[["Copyright","The legal right of a creator or rights holder to control how their work is used."],["Permission","A clear OK from the subscriber, ideally written."],["Content policy","A publisher's rules on what players and creators may do with videos of a game."],["Monetization","Earning money from a video through ads, sponsorships or sales."],["Strike","A formal penalty on an account for breaking a platform rule."],["Claim","A notice that someone says a video uses their protected content."],["Fair use","A legal idea in some countries that depends on the facts. It is not an automatic permission."],["License","A defined permission to use something, often with terms."]],
+ assign:["Find the official content policy for one game you like. Write 5 rules from it in your own words and save the link and today's date.","Write a permission message you could send to a creator. Include videos, platforms, monetization and credit.","Create a records sheet with the columns described in this lesson and fill it in for one imaginary project.","Find where a free music or sound library for your editor explains its terms. Write down 3 rules from it.","Write your own 7-step checklist from this lesson in a form you can keep next to your editor."],
+ quiz:[
+ {q:"What is the safest source of footage?",o:["Any popular video","Your own, or footage with clear written permission","A random reupload"],a:1,why:"Permission you can prove protects you if anyone questions the clip."},
+ {q:"Does giving credit replace permission?",o:["Yes, always","No, credit is polite but not permission","Only on weekends"],a:1,why:"Credit does not give you rights. You still need permission or a policy that allows the use."},
+ {q:"Why keep screenshots and dates of permission?",o:["It looks decorative","It lets you prove what was agreed if a question comes up","Platforms require screenshots for every post"],a:1,why:"Records let you answer quickly with proof and make you look professional."},
+ {q:"Is there a clip length that is automatically safe?",o:["Yes, under 10 seconds","No, there is no magic length","Yes, under 30 seconds"],a:1,why:"The length of a clip does not by itself make the use allowed."},
+ {q:"You get a claim on a clip and you have written permission. What should you do?",o:["Ignore it","Read it carefully and, if appropriate, use the platform's dispute process with your proof","Delete your account"],a:1,why:"Check the details, gather your proof and respond honestly within the stated time."}
+ ]},
+
+{id:"m5",title:"Digital products and courses",
+ intro:"A digital product is something you make once and can sell many times, such as a checklist, a template pack, an ebook or a short course. In this lesson you will learn how to choose a problem, test demand, build a small first version with free tools, price it honestly, sell it and then grow it into a course. As always, nothing here guarantees sales. It is a careful method for testing an idea at low cost.",
+ sections:[
+ {h:"What a digital product is",
+  p:["A digital product is a file or online resource that a buyer receives digitally. Common formats include a PDF checklist, a spreadsheet template, a pack of caption templates, an ebook, a set of video lessons or a full course. There is no shipping, and you can deliver the same product to many people.",
+   "The value of a product is not in the file. It is in the problem it solves. A 10-page PDF that saves someone a week of confusion can be more valuable than a 200-page book that does not help them do anything. Think about the result the buyer wants and design the product to get them there as directly as possible."]},
+ {h:"Choosing a problem you can solve",
+  p:["Start with problems you have already solved or are in the middle of solving. Think about what people ask you. Think about what confused you when you started. If you are learning to clip GTA-style gameplay, the problems you recently overcame are fresh in your mind, and that is useful, because experts often forget what beginners struggle with.",
+   "Narrow the problem. Not clipping, but how to cut your first 30-second GTA clip in CapCut. Not marketing, but how to write a first message to a streamer. The narrower the problem, the easier it is to describe, build and sell. You can always make more products later."],
+  ul:["What did I recently learn that others struggle with?","What questions do beginners ask repeatedly?","What task takes people a long time that I can make faster with a template?","Can I describe the result in one sentence?"],
+  ex:"Narrow problem: how to write the first message to a streamer so it gets a reply. Product: a 12-page PDF called First Message Toolkit with 10 templates, 5 real examples and a tracking sheet."},
+ {h:"Testing demand before you build",
+  p:["Building a product that nobody wants is the most common waste of time. Test interest first. Post about the problem and see who responds. Ask 5 to 10 people in your network or community whether they have this problem and what they have tried. Offer a free mini version and see whether people use it and ask for more.",
+   "A stronger test is a pre-sale: describe what you will make, set a modest price and ask whether anyone would like to buy it when it is ready. If nobody is interested, you have saved weeks. If a few people say yes, you have both feedback and motivation. Be honest about what is finished and what is coming, and never take money for something you cannot deliver."]},
+ {h:"Choosing the format",
+  p:["Pick the simplest format that solves the problem. A checklist works for repeatable steps. A template works for things people fill in, such as a message or a spreadsheet. An ebook works when explanation matters. A mini course works when people need to see you do something. A community or coaching works later, when you have experience and time.",
+   "For a first product, a small PDF or template is almost always the best choice. It is quick to make, easy to deliver and easy to improve. A full video course takes much more effort, and it is better to start there only after a smaller product has shown that people care."],
+  l:["Checklist: for steps that repeat.","Template pack: for messages, scripts and sheets.","Ebook: for explanations and examples.","Mini course: for skills that need demonstration.","Community or coaching: later, with experience."]},
+ {h:"Building the first version with free tools",
+  p:["Write an outline first. List the sections, the order and what the reader will be able to do after each one. Then write short sections in plain language. Use real examples. A reader should be able to follow your steps without guessing.",
+   "For design, free tools like Canva or Google Docs are enough. Use a clean layout with readable fonts, plenty of white space, simple headings and consistent colors. Add one or two screenshots if they make a step clearer. Export as PDF and open it on a phone and a computer to check it.",
+   "Ask 2 or 3 people to try the product and tell you where they got stuck. Fix those places. A small product that works is better than a large product that confuses."]},
+ {h:"Pricing honestly",
+  p:["Pricing a product is part research and part testing. Look at similar products and see how they are priced. Consider the value of the result, the length and quality of the product and what your audience can afford. A low starting price can help early buyers say yes, and you can raise it as you improve the product and gather proof.",
+   "Offer clear options if useful, such as a basic version and a version with extra templates. Avoid fake discounts and fake countdowns. If you offer a limited-time price, make sure it is true. Trust is worth far more than a short-term sale.",
+   "Have a clear refund policy. Even a simple statement shows professionalism. Check the rules of the store you use, and the consumer rules in your country, so that you follow them."]},
+ {h:"Where to sell and how delivery works",
+  p:["Free-to-start online stores let you upload a file, set a price, collect payment and deliver the download automatically. Compare a few options and check their fees, payout methods and whether they support your country. Choose one that is simple and that pays out in a way you can use.",
+   "After setting up, test the whole buyer journey yourself: view the page, go through checkout if there is a test mode, and confirm the download works. Many problems appear only when you test the full path. Make sure the page loads well on a phone."]},
+ {h:"Writing the sales page",
+  p:["A sales page does not need to be fancy. It needs to answer a few questions clearly. What is this? Who is it for? What will I be able to do after using it? What is included? What does it cost? How do I get it? Add a short section for common questions, such as format, delivery and refunds.",
+   "Write in plain language. Lead with the result, not with a description of the file. Include real examples or a small preview so people can see the quality. If you have testimonials from real users, include them with permission, and never invent them."],
+  ol:["Headline: the result the buyer wants.","Who it is for and who it is not for.","What is inside, in a short list.","A preview or sample page.","Price and how delivery works.","Short answers to common questions.","One clear button to buy."]},
+ {h:"A small launch plan",
+  p:["A launch can be small and calm. Tell your community what you made and why, show a preview, share one real example of how it helps and give the link. Do this over several days instead of once. Answer every question you receive, because questions show you what buyers want to know and help you improve the page.",
+   "After the first buyers, ask for feedback. What did they like? What was missing? What would make it better? Use their answers to create version two. A product improves most through real use."]},
+ {h:"From product to course",
+  p:["When a smaller product has proven that people want your help, you can build a course. Start from the result: after this course the student can do X. Then list the modules that move from zero to X in a sensible order. Each module has a few short lessons. Each lesson has a clear goal, an explanation, an example, a small task and a check question.",
+   "Keep lessons short, about 5 to 12 minutes of video or a few pages of text. Record the first lesson only, and ask a few people to try it before you build the rest. Teach one focused idea at a time and only move forward when the learner has shown they understood. This is how this platform's lessons are built too.",
+   "Support matters. Decide how students can ask questions, how fast you will answer and what happens if someone is unhappy. A course with clear support feels trustworthy."],
+  ex:"Mini course outline: Result: cut and post a 30-second GTA-style clip. Module 1: choose moments. Module 2: cut and trim. Module 3: hooks and captions. Module 4: export and post. Module 5: review your results. Each module ends with a task and a 3-question check."}
+ ],
+ mistakes:["Building for months before asking anyone whether they want it.","Choosing a problem so wide that the product tries to teach everything.","Making the first product too large to finish.","Using fake testimonials, fake discounts or fake countdowns.","Never testing the checkout and download yourself.","Taking money for features that do not exist yet.","Ignoring buyer feedback after the first sales."],
+ gloss:[["Digital product","A downloadable or online product that can be delivered many times."],["Pre-sale","Selling before the product is finished, with honest information about what is coming."],["Template","A ready-made structure that people fill in with their own details."],["Sales page","A page that explains the product and lets people buy."],["Refund policy","Your stated rule for when buyers can get their money back."],["Module","A group of related lessons inside a course."],["Outcome","The result a buyer or student wants to achieve."],["Version two","An improved version built from real feedback."]],
+ assign:["Write a list of 10 problems you recently solved or are solving. Choose 3 and narrow each to one specific sentence.","Ask 5 people whether they have your chosen problem and what they tried. Write down their answers.","Outline a small product with sections, examples and the result for each section.","Draft a sales page using the 7 parts in this lesson, with real wording.","Write the outline of a 5-module mini course with a task and a check question for each module."],
+ quiz:[
+ {q:"What should the first version of a product be?",o:["As large as possible","The smallest useful version","A full video course"],a:1,why:"A small version gets feedback fast and costs little to fix."},
+ {q:"What is the best way to reduce the risk of building something nobody wants?",o:["Build it quietly for months","Test interest and ask real people first","Copy the biggest competitor"],a:1,why:"Testing demand early saves time and shows what people actually need."},
+ {q:"Which is an honest way to use a limited-time price?",o:["Show a countdown that resets every day","Offer a time-limited price that truly ends","Never mention price"],a:1,why:"Fake urgency damages trust. If you use limited time, make it real."},
+ {q:"What should a sales page lead with?",o:["A long history of your life","The result the buyer wants","A list of technical file details"],a:1,why:"Buyers care first about what they will be able to do after using the product."},
+ {q:"What do you do after the first buyers use the product?",o:["Ignore feedback","Ask for feedback and use it to improve a second version","Stop selling"],a:1,why:"Real use shows you what to fix and what to add."}
+ ]},
+
+{id:"m6",title:"Sales, messages and confidence",
+ intro:"Selling is helping a person decide. This lesson covers the basics of marketing psychology used honestly, storytelling, writing offers and sales copy, professional messages on WhatsApp, Instagram and email, active listening, handling objections, negotiation and building real confidence. You will see realistic conversation examples throughout. You can practice them out loud, with a friend or with the AI section in role-play mode.",
+ sections:[
+ {h:"Selling as helping someone decide",
+  p:["Many beginners dislike selling because they imagine pressure and tricks. Good selling is the opposite. It is understanding what someone wants, explaining honestly how you can help and letting them decide freely. If your offer is not right for them, the best sale is the one you do not make.",
+   "This mindset lowers your stress. You are not trying to win. You are trying to find out whether there is a fit. Sometimes the answer is yes, sometimes no, and sometimes later. All of these are acceptable results, and each one teaches you something."]},
+ {h:"Marketing psychology, used honestly",
+  p:["People are not purely logical, and understanding common patterns helps you communicate clearly. You should use these ideas to make a good offer easier to understand, never to deceive.",
+   "Attention comes first. People scroll fast, so your first line must be clear and relevant. Trust comes next. People buy from those they believe will deliver. Proof builds trust: real examples, real results, real testimonials with permission. Clarity matters, because confused people do not decide. Social proof means people feel safer when others like them have used something, but it must be real. Loss aversion means people dislike losing more than they like gaining, so describing a real cost of staying stuck can motivate, as long as you are truthful and not fear-mongering. Anchoring means the first number a person sees influences how they judge other numbers, so showing a larger package first can make a middle option feel reasonable.",
+   "Honesty is the long-term strategy. A tactic that works once but damages trust makes your next sale harder. Aim to be someone people are glad they dealt with."],
+  l:["Attention: a clear, relevant first line.","Trust: proof, consistency and honesty.","Clarity: one idea, one next step.","Social proof: real testimonials, with permission.","Loss aversion: name a real cost, without scaring.","Anchoring: show options so the middle makes sense."]},
+ {h:"Storytelling that serves the sale",
+  p:["Stories help people remember and feel. A useful sales story has a person, a problem, a turning point and a result. It does not need to be dramatic. It needs to be true and relevant to the person you are talking to.",
+   "A simple structure is: where I was, what I tried, what changed, what happened. For example: I used to spend four hours cutting one clip and nobody watched it. I changed how I chose moments and wrote a hook in the first two seconds. My next clips took one hour, and viewers watched longer. Keep stories short and connect them to the offer."],
+  ex:"Short story for a message: Last month I helped a small streamer turn one 2-hour stream into 8 short clips. He had never posted shorts before. His first week, his shorts got more views than his last 10 long videos, and he asked me to keep going. (Only say this if it is true. If you do not have such a story yet, use a story about your own learning.)"},
+ {h:"Writing a clear offer",
+  p:["An offer is a plain statement of what you provide, for whom, what result they can expect, what it costs and what to do next. A clear offer reduces back-and-forth and makes saying yes easy. A weak offer is vague, such as: I can edit videos. A clear offer is specific.",
+   "Be careful with promises. You can promise your own actions, like delivery time and number of clips. You should not promise outcomes you cannot control, such as views, followers or income."],
+  ol:["Who it is for.","What you do, in one sentence.","What is included.","Delivery time.","Price and payment terms.","What the next step is."],
+  ex:"Offer: I turn long gaming streams into short vertical clips for streamers who want to post on TikTok, Reels and Shorts. For [price], you get 10 clips of up to 45 seconds with hooks and captions, delivered within 5 days after you send the videos, with one round of changes. To start, reply with the stream link and I will send the details and a deposit link."},
+ {h:"Sales copy formulas you can use",
+  p:["Copy means the words you write to inform and persuade. Two simple formulas work well for beginners. The first is Problem, Agitate, Solution. State the problem clearly, describe honestly what it costs the person to keep it, then present your solution. The second is Before, After, Bridge. Describe the current situation, describe the situation they want, then explain how your offer is the bridge between them.",
+   "Whichever you use, keep sentences short, avoid jargon and use the words your audience uses. Read your copy out loud. If it sounds unnatural, rewrite it. Replace big claims with specific facts."],
+  ex:"Problem, Agitate, Solution: You record long streams but never post shorts. Every week, great moments disappear into hours of video, and new viewers never see them. I find the best moments and turn them into ready-to-post shorts, so you can focus on streaming.\n\nBefore, After, Bridge: Before: your best moments are buried in 3-hour streams. After: you have a steady set of short clips ready to post each week. Bridge: send me your streams and I will clip, caption and deliver them."},
+ {h:"Professional messages on WhatsApp, Instagram and email",
+  p:["Professional does not mean stiff. It means clear, respectful and reliable. Greet the person by name, get to the point, use short paragraphs and end with a clear next step. Reply at reasonable hours and within a day when possible. If you will take longer, say so.",
+   "Match the channel. WhatsApp and Instagram are quick and informal, so use short sentences and a friendly tone. Email can be more structured, with a subject line that tells the person what the message is about. Avoid all caps, too many emojis and long voice notes unless the other person prefers them. Always read your message once before sending."],
+  ex:"WhatsApp, delivering work: Hi Ada, the 10 clips are ready. Here is the folder link: [link]. Please check them and send any changes by Friday. Thank you!\n\nInstagram, asking for feedback: Hi Tunde, thanks again for working with me. Could you share one sentence on how it went? It would help me a lot, and I will only use it with your permission.\n\nEmail, sending an invoice: Subject: Invoice for 10 short clips. Hello Tolu, attached is the invoice for the 10 clips delivered on [date]. Payment details are in the document. Please let me know if you have questions. Thank you."},
+ {h:"Active listening",
+  p:["Active listening means giving the other person your full attention and showing that you understood. It is one of the strongest skills in sales and in everyday life. When someone explains their needs, do not think about your next line. Let them finish. Then reflect back what you heard and ask a follow-up question.",
+   "Reflecting sounds like: So you want ten clips a week and you are worried about quality, is that right? This lets the person confirm or correct you, and it makes them feel heard. Good questions are open and simple: What would a great result look like for you? What have you tried so far? What matters most this month?",
+   "In text chats, listening shows up as careful reading. Reread their message before replying and answer their actual questions. Missing a question and sending a generic reply is the fastest way to lose trust."],
+  ex:"Creator: I need clips fast but I do not want them to look cheap.\nYou: Got it. So speed and quality both matter. When you say cheap, what have you seen that you did not like?\nCreator: Tiny captions and too many sound effects.\nYou: Thanks, that helps. I will use large clear captions and keep the effects light. Would you like to see a sample in that style before we start?"},
+ {h:"Handling objections",
+  p:["An objection is a concern a person raises before deciding. Objections are normal and often mean the person is thinking seriously. Do not argue. Listen, ask what is behind it and respond honestly. The three most common objections are price, timing and trust.",
+   "For price, find out whether it is about the total amount, the budget or the value. You can adjust the scope, offer a smaller package or explain what is included. Do not instantly cut your price. For timing, ask what would make it a better time and offer to follow up later. For trust, offer samples, a small trial job or references from real clients, if you have them."],
+  ex:"Price: Client: That is too expensive. You: Understood. What budget did you have in mind? For that budget I can do 5 clips instead of 10. Would that work?\n\nTiming: Client: Maybe next month. You: No problem. Would it help if I send a quick reminder on the 1st? Meanwhile, I can send a free sample so you know what to expect.\n\nTrust: Client: I do not know you yet. You: Fair enough. How about a small trial of 2 clips first? You can see the quality before deciding on more."},
+ {h:"Negotiation basics",
+  p:["Negotiation is finding terms that work for both sides. Prepare by deciding three things before the conversation: the ideal result, the minimum you will accept and what you can offer instead of lowering your price, such as a smaller scope, a longer delivery time or a longer commitment.",
+   "During the conversation, stay calm and friendly. Ask questions to understand their position. State your proposal clearly and then pause. Silence can feel uncomfortable, but it gives the other person time to think. If you cannot agree, you may politely decline. Being willing to walk away is part of negotiating well.",
+   "Put the final agreement in writing and confirm each point. Misunderstandings often come from unwritten assumptions."]},
+ {h:"Building real confidence",
+  p:["Confidence is not a personality trait you either have or lack. It grows from preparation and repetition. Before an important message or call, write your first sentence, list your main points and prepare answers to two or three likely questions. Practice out loud at least three times.",
+   "In live conversations, slow down. Breathe, speak a little slower than feels natural and pause between ideas. Nervousness is normal and usually less visible to others than it feels to you. Focus on the other person, not on yourself. If you make a mistake, correct it simply and continue.",
+   "Treat every conversation as practice. After each one, write down what went well and one thing to improve. Over weeks, your confidence will rise because it is built on evidence of your own progress."],
+  ul:["Prepare your first sentence.","Practice out loud, not only in your head.","Speak slowly and pause.","Focus on the other person.","Review each conversation and note one improvement."]},
+ {h:"Setting boundaries and saying no",
+  p:["Professional relationships need boundaries. You can say no to work you cannot do well, to unrealistic deadlines, to requests outside the agreed scope and to anything that feels unethical. Saying no politely protects your reputation.",
+   "A good no is short, kind and offers an alternative when possible. For example: I cannot deliver 20 clips by tomorrow. I can deliver 5 by tomorrow and the rest by Friday. Would that work? Clear boundaries make clients trust you more, not less."]}
+ ],
+ mistakes:["Sending long messages with no clear next step.","Arguing with an objection instead of asking about it.","Promising results you cannot control.","Dropping your price the moment someone hesitates.","Inventing stories or testimonials.","Answering a different question than the one asked.","Skipping preparation and then feeling nervous."],
+ gloss:[["Offer","A clear statement of what you provide, for whom, for what price and with what next step."],["Objection","A concern raised before someone decides."],["Anchoring","When the first number seen influences how other numbers are judged."],["Social proof","Evidence that others have used and liked something."],["Copy","Written words meant to inform and persuade."],["Active listening","Giving full attention and showing you understood."],["Scope","The exact work and limits of what you agreed to do."],["Boundary","A limit you set on what you will do or accept."]],
+ assign:["Write your own offer using the 6 parts in this lesson.","Write one Problem, Agitate, Solution paragraph and one Before, After, Bridge paragraph for the same offer.","Write 3 WhatsApp messages: one first contact, one delivery message and one request for feedback.","Role-play a price objection with a friend or with the AI section in role-play mode and write what you would change.","Write your three negotiation numbers for one service: ideal, minimum and what you could offer instead of a lower price."],
+ quiz:[
+ {q:"A client says your price is too high. What is a good first move?",o:["Drop the price at once","Ask about their budget and adjust the scope","Stop replying"],a:1,why:"Adjusting scope keeps your rate and gives the client a way to say yes."},
+ {q:"What does active listening include?",o:["Waiting for your turn to talk","Letting them finish, reflecting back what you heard and asking a follow-up","Interrupting with your offer"],a:1,why:"Reflecting shows you understood and invites correction."},
+ {q:"Which promise is safe to make in an offer?",o:["You will get 100,000 views","Delivery within 5 days after receiving the videos","You will earn money"],a:1,why:"You can promise your own actions. You cannot control views or income."},
+ {q:"What is the honest way to use social proof?",o:["Invent testimonials","Share real feedback with permission","Never mention results"],a:1,why:"Real proof builds trust. Fake proof destroys it."},
+ {q:"What builds confidence most reliably?",o:["Hoping for the best","Preparation, practice and reviewing each conversation","Memorizing a long script word for word"],a:1,why:"Confidence grows from preparation and evidence of your own progress."}
+ ]},
+
+{id:"m7",title:"How subscriptions and course access work",
+ intro:"Understand what a guest preview includes, what an active subscription unlocks and how to use a learning platform responsibly.",
+ sections:[
+ {h:"Guest preview and paid access",p:["A guest can explore the academy, read the course overview, view the plan options and open the lessons marked as free preview. The preview helps you decide whether the course is useful before subscribing.","An active subscriber can open all published lessons, complete assignments, track progress and use the included AI learning assistant. Access remains available while the subscription is active, subject to the published plan terms."]},
+ {h:"What a subscription includes",p:["A subscription is paid access for a defined period, such as one month or one year. In this academy, every plan includes the same learning features: all 12 lessons, practical assignments, knowledge checks, progress tracking and the AI assistant. The billing period and price are the only differences between plans.","Before choosing a plan, check its price, renewal period, cancellation process and any refund terms. Do not subscribe unless you understand what will be charged and when."]},
+ {h:"How access changes",p:["Before payment is confirmed, your account remains in guest preview mode. After a real payment provider confirms a successful payment, the platform can activate subscriber access for the purchased period.","If a subscription expires or is cancelled, paid access should end according to the plan terms. Your learning progress may be saved separately, but saved progress does not itself grant access to locked lessons."]},
+ {h:"Keeping your account safe",p:["Use a strong, unique password and never share sign-in codes. Check that payment pages belong to the provider you intended to use. Keep receipts and contact the platform through its published support channel if a payment or access status looks wrong.","A real course platform verifies subscription status securely before delivering paid content. A visual lock on a page is not enough by itself; the service that stores the lessons must also check access."]},
+ {h:"Make the most of the course",p:["Choose a lesson, take notes and complete its practical assignment before moving on. Revisit earlier lessons when a later project needs the same skill. Use the progress tracker as a reminder of what you have completed, not as a measure of your worth.","The AI assistant can help explain ideas and suggest practice, but it can make mistakes. Check important information and use your own judgment when applying what you learn."]}
+ ],
+ mistakes:["Assuming a plan is active before payment is confirmed.","Sharing passwords or one-time sign-in codes.","Ignoring the renewal period or cancellation terms.","Expecting a guest preview to include every paid lesson.","Treating course completion as a guarantee of views, clients or income."],
+ gloss:[["Guest preview","Free access to selected introductory content."],["Subscriber","A user with a confirmed, active paid plan."],["Billing period","The amount of time covered by a subscription payment."],["Renewal","The next billing event for a continuing plan."],["Access control","The checks that decide whether content can be opened."],["Payment confirmation","A verified notice that a payment succeeded."]],
+ assign:["Write down what the guest preview includes and what a paid plan unlocks.","Compare the monthly and yearly billing periods and calculate which one fits your needs.","Create a short account-safety checklist with at least four steps."],
+ quiz:[{q:"What can a guest do?",o:["Open every paid lesson","View the free preview and plans","Use all subscriber features"],a:1,why:"Guest access is limited to preview content and plan information."},{q:"What do all subscription plans include in this academy?",o:["Different lesson libraries","The same course features, with different billing periods","Management tools"],a:1,why:"The plans differ by billing period and price, not by course features."},{q:"When should paid access activate?",o:["When someone clicks a plan","After payment is confirmed","When the page is refreshed"],a:1,why:"A real payment confirmation should trigger access activation."},{q:"What should you check before subscribing?",o:["Price, billing period and cancellation terms","Only the button color","Nothing"],a:0,why:"Understand the payment terms before choosing a plan."},{q:"Does course completion guarantee income?",o:["Yes","No, outcomes depend on many factors","Only on yearly plans"],a:1,why:"Learning builds skills, but it cannot guarantee business results."}]},
+{id:"m8",title:"Planning a content strategy",intro:"Build a repeatable plan instead of posting at random.",sections:[{h:"Choose a clear audience",p:["Decide who a clip is meant to help or entertain. “Everyone” is too broad. A gaming channel might focus on funny fails, skilled plays or beginner tips. Pick one main audience and write what they usually enjoy."]},{h:"Create content pillars",p:["Choose three repeatable themes, such as highlights, tutorials and behind-the-scenes moments. Pillars make it easier to plan while keeping your feed varied. Give each pillar a clear purpose and a few example ideas."]},{h:"Make a realistic schedule",p:["Choose a schedule you can maintain alongside school and other responsibilities. Batch ideas and prepare drafts, but leave room to respond to timely moments. Consistency means a dependable rhythm, not posting every hour."]}],mistakes:["Adding effects that distract from the message.", "Skipping a quality check before sharing.", "Making promises about views, sales or client outcomes.", "Using footage, music or designs without checking permission."],gloss:[["Audience", "the people a piece of content is intended for."], ["Content pillar", "a repeatable theme that organizes posts."], ["Batching", "preparing several pieces of work in one session."]],assign:["Write a one-sentence audience description.", "Choose three content pillars and list five ideas under each.", "Create a seven-day publishing plan with realistic time blocks."],quiz:[{q:"What is a content pillar?",o:["A random trend", "A repeatable theme for content", "A payment method"],a:1,why:"Pillars organize ideas around a few clear themes."},{q:"What makes a schedule useful?",o:["It is realistic and repeatable", "It requires posting constantly", "It never changes"],a:0,why:"A sustainable schedule is easier to maintain."}]},
+{id:"m9",title:"Advanced editing and visual storytelling",intro:"Use rhythm, framing and transitions to make edits clearer and more engaging.",sections:[{h:"Edit for meaning first",p:["Every cut should help the viewer understand the moment. Remove pauses that add nothing, but keep a reaction or silence when it creates suspense. Do not add effects just because they are available."]},{h:"Use framing with purpose",p:["Keep the important action visible in the chosen aspect ratio. For vertical video, check that faces, game action and captions are not hidden by interface buttons. Reposition and scale carefully, and preview on a phone-sized screen."]},{h:"Build rhythm and continuity",p:["Use cuts to control pace. A fast sequence can communicate chaos; a longer shot can let a reaction land. Match action across cuts where possible, and use transitions only when they clarify a change in time, place or idea."]}],mistakes:["Adding effects that distract from the message.", "Skipping a quality check before sharing.", "Making promises about views, sales or client outcomes.", "Using footage, music or designs without checking permission."],gloss:[["Continuity", "the feeling that shots connect logically."], ["Pacing", "the speed and rhythm of an edit."], ["Safe area", "the part of the frame not covered by platform controls."]],assign:["Take one clip and make a clean version with no decorative effects.", "Make a second version that changes pace using shot length and sound.", "Compare both versions and explain which edit choices improve clarity."],quiz:[{q:"What should guide an editing effect?",o:["Whether it is trending", "Whether it supports the story", "How many effects are available"],a:1,why:"Effects should support meaning rather than distract."},{q:"Why preview vertical clips on a phone?",o:["To check framing and interface-safe areas", "To increase file size", "To remove all captions"],a:0,why:"A phone preview reveals cropping and readability issues."}]},
+{id:"m10",title:"Audio, voice and sound design",intro:"Make dialogue clear and use sound thoughtfully without overwhelming the video.",sections:[{h:"Prioritize clear speech",p:["Viewers should be able to understand important dialogue. Listen with headphones, reduce distracting background noise where possible and keep voice levels consistent. Avoid extreme volume changes between clips."]},{h:"Layer sound carefully",p:["Music, effects and voice each have a role. Keep background music lower than speech, and use effects to emphasize meaningful actions. Silence can also be effective when it makes a moment feel more important."]},{h:"Check permissions and exports",p:["Use audio you created, licensed or are permitted to use on the platform where you publish. A track available in one app may not be cleared for every use. Listen to the exported file before publishing."]}],mistakes:["Adding effects that distract from the message.", "Skipping a quality check before sharing.", "Making promises about views, sales or client outcomes.", "Using footage, music or designs without checking permission."],gloss:[["Sound design", "the deliberate use of audio to support a story."], ["Audio mix", "the balance between different sound sources."], ["License", "permission with conditions for using creative work."]],assign:["Choose a permitted audio track and place it under a spoken clip.", "Balance voice and music so every important word is clear.", "Export and listen once with headphones and once through ordinary speakers."],quiz:[{q:"What should usually be easiest to hear?",o:["Important dialogue", "Background music", "Every sound at equal volume"],a:0,why:"The viewer needs to understand the speech."},{q:"Does music in one app automatically have universal permission?",o:["Yes", "No, check the applicable terms", "Only for long videos"],a:1,why:"Permissions can vary by platform and use."}]},
+{id:"m11",title:"Thumbnails, titles and channel identity",intro:"Package videos clearly so viewers know what they are choosing.",sections:[{h:"Design a readable thumbnail",p:["Use one main subject, strong contrast and a short phrase if text is needed. Keep important details large enough to read on a small screen. Avoid clutter and do not promise something the video does not show."]},{h:"Write accurate titles",p:["A useful title tells viewers what happens or why it matters. Specific wording is stronger than vague hype. Do not use misleading claims, fake urgency or unrelated trending names to attract clicks."]},{h:"Create a consistent identity",p:["Choose a small set of colors, fonts and visual rules. Use them consistently without making every post look identical. Your identity should help people recognize your work while the content remains the main attraction."]}],mistakes:["Adding effects that distract from the message.", "Skipping a quality check before sharing.", "Making promises about views, sales or client outcomes.", "Using footage, music or designs without checking permission."],gloss:[["Thumbnail", "a small preview image representing a video."], ["Brand identity", "recognizable visual and verbal choices."], ["Click-through rate", "the share of impressions that become clicks."]],assign:["Create two thumbnail drafts for the same clip and compare readability at small size.", "Write five accurate title options for the clip.", "Define three visual rules for your channel identity."],quiz:[{q:"What is the main job of a thumbnail?",o:["Explain the video visually", "Replace the video", "Guarantee views"],a:0,why:"A thumbnail helps viewers understand what they may watch."},{q:"What makes a title trustworthy?",o:["It accurately describes the content", "It promises impossible results", "It copies a popular title"],a:0,why:"Accurate titles build audience trust."}]},
+{id:"m12",title:"Analytics and improving performance",intro:"Read basic performance signals and use them to make careful improvements.",sections:[{h:"Understand useful metrics",p:["Views show how often a video was watched under a platform’s counting rules. Average watch time and retention help show where viewers stay or leave. Engagement can include comments, shares and saves. Each platform defines metrics differently."]},{h:"Look for patterns, not one-off results",p:["Compare several posts with similar topics and formats. A single unusually high or low result may have many causes. Note the hook, length, topic and publishing context before drawing conclusions."]},{h:"Run one small experiment",p:["Change one thing at a time, such as the opening line or caption style. Keep other choices similar and compare the results over several posts. Treat analytics as clues, not guarantees or a judgment of your worth."]}],mistakes:["Adding effects that distract from the message.", "Skipping a quality check before sharing.", "Making promises about views, sales or client outcomes.", "Using footage, music or designs without checking permission."],gloss:[["Retention", "the share of viewers who continue watching over time."], ["Impression", "an instance where a platform displays a piece of content."], ["Experiment", "a planned test used to learn what works."]],assign:["Choose three of your own posts and record the available metrics.", "Identify one pattern and one question the data cannot answer.", "Plan a small test that changes only one editing or packaging choice."],quiz:[{q:"Why compare multiple posts?",o:["To reduce conclusions from one unusual result", "To guarantee future views", "To avoid learning"],a:0,why:"Patterns across posts are more informative than one result."},{q:"What is a fair experiment?",o:["Change many things at once", "Change one main variable", "Ignore the results"],a:1,why:"Changing one variable makes the comparison easier to interpret."}]},
+{"id":"m13","title":"Sports starter guide: 10 sports, rules and examples","intro":"Explore ten popular sports, understand their basic rules, and choose a sport to try safely. There is no single best sport for everyone: the right choice depends on your interests, access, abilities and available facilities.","sections":[{"h":"Ten sports to know","p":["1. **Football (soccer):** Two teams try to score by getting the ball into the opposing goal. Most players cannot use their hands or arms; the goalkeeper can use hands inside their own penalty area. Example: pass to a teammate in space rather than crowding around the ball.","2. **Basketball:** Two teams score by putting the ball through the opponent’s hoop. Players move by dribbling; running while holding the ball without dribbling is travelling. Example: pass to an open teammate instead of forcing a difficult shot.","3. **Volleyball:** Teams send the ball over a net and try to make it land in the other team’s court. A team usually has up to three touches to return it, and the same player generally cannot hit it twice in a row. Example: receive, set, then spike.","4. **Badminton:** Players use rackets to hit a shuttlecock over a net. A rally ends when the shuttle lands out, hits the net and fails to cross, or is not returned legally. Example: aim a controlled shot into open court rather than hitting as hard as possible.","5. **Table tennis:** Players use small rackets to hit a lightweight ball across a table net. The ball must bounce on your side before you return it; in singles, serves alternate every two points. Example: use a short serve to make the opponent move forward.","6. **Athletics (track and field):** Includes running, jumping and throwing events. Competitors follow the rules for their event, such as staying in assigned lanes in certain races or taking off from behind the foul line in long jump. Example: a 100-metre sprint is a race to the finish, not a contact event.","7. **Swimming:** Competitors race through water using strokes such as freestyle, backstroke, breaststroke and butterfly. Rules cover the stroke technique, starts and turns. Example: in freestyle, swimmers generally use any stroke, commonly front crawl.","8. **Tennis:** Players hit a ball over a net into the opponent’s court. Points are scored 15, 30, 40 and game; a player must win by two points unless a format uses a tiebreak. Example: serve diagonally into the opposite service box.","9. **Cricket:** Two teams take turns batting and fielding. Batters score runs by running between wickets or hitting boundaries; the fielding team tries to dismiss batters. Example: a batter can score four when the ball reaches the boundary after touching the ground.","10. **Rugby:** Teams carry, pass or kick an oval ball to score tries and other points. In rugby union, passes by hand must go sideways or backwards, not forward. Tackling is tightly regulated; learn safe technique with a qualified coach. Example: pass backwards to a teammate running into space."]},{"h":"How to choose a sport that fits you","p":["Think about what you enjoy: team play, individual challenges, speed, coordination, strategy or time outdoors. Consider the cost of equipment, access to a safe playing space, coaching, transport and whether beginners are welcome. You do not need expensive equipment to start many activities.","Try a beginner session before committing. Ask about age groups, required equipment, supervision, fees and safety procedures. Choose a welcoming environment where rules are explained and questions are encouraged. You can enjoy a sport recreationally without aiming to compete.","Do not treat a list as a ranking. Football may be easy to find in one community, while badminton, swimming or athletics may be more accessible in another. Your best choice is the one you can enjoy and practise safely."]},{"h":"Rules, fair play and examples","p":["Learn the rules of the exact version you are playing. School, recreational and professional formats can differ. Before a game, agree on boundaries, scoring, team size, time limits and how disputes will be handled.","Respect referees, coaches, teammates and opponents. Do not argue over every decision, deliberately injure someone, mock beginners or cheat. If you do not understand a call, ask politely when play has stopped.","Example: in a friendly basketball game, a player admits that the ball touched their hand before going out, even though the referee did not see it. That is fair play. In a football game, a player helps an opponent up after a harmless collision and waits for the referee’s signal before restarting."]},{"h":"Safety before and during sport","p":["Use a suitable playing area and equipment that fits. Warm up gently, learn the correct technique and follow the coach’s instructions. Drink water and take breaks when needed. Avoid playing through pain, dizziness, unusual weakness or feeling unwell; stop and tell a responsible adult or coach.","Swimming requires particular care: swim only in a supervised, permitted area with appropriate adult supervision and lifeguard support. Never swim alone or enter water to rescue someone; alert a lifeguard or emergency services.","Contact sports and activities with higher risks should be learned with qualified instruction and appropriate protective equipment. Never copy a dangerous stunt because it appears in a video."]}],"mistakes":["Treating one sport as best for everybody.","Ignoring the rules of the version being played.","Skipping warm-ups or using unsuitable equipment.","Playing through pain or feeling unwell.","Mocking opponents or beginners instead of showing respect."],"gloss":[["Fair play","Respecting rules, teammates, opponents and officials."],["Dribbling","Moving with a ball while controlling it by bouncing it, as in basketball."],["Rally","A sequence of play between the serve and the end of a point."],["Warm-up","Gentle preparation before more demanding activity."]],"assign":["Choose two sports from the list and compare their rules, equipment and playing spaces.","Write a simple beginner checklist for the sport you would like to try.","Find a supervised beginner opportunity and list the questions you would ask before joining."],"quiz":[{"q":"In basketball, what must a player generally do to move while holding the ball?","o":["Dribble the ball","Carry it while running","Kick it"],"a":0,"why":"Dribbling is the normal way to move with the ball."},{"q":"How many touches does a volleyball team usually have to return the ball?","o":["One","Up to three","Unlimited"],"a":1,"why":"A team generally has up to three hits to return the ball."},{"q":"What is the safest approach to learning a new sport?","o":["Copy advanced stunts","Join a supervised beginner session and learn the rules","Ignore protective equipment"],"a":1,"why":"Qualified guidance and suitable equipment help beginners learn safely."},{"q":"Which statement about the ten sports is most accurate?","o":["One is best for everyone","The best choice depends on the person and circumstances","Rules never vary"],"a":1,"why":"Interests, access and local formats all matter."}]},
+{"id":"m14","title":"Everyday life skills: communication, teamwork and problem-solving","intro":"Build practical skills for school, sport, friendships and future projects: listening, communicating clearly, working with others and handling disagreements respectfully.","sections":[{"h":"Listen before responding","p":["Give the speaker your attention, avoid interrupting and ask a clarifying question if something is unclear. Listening does not mean you must agree; it means you understand what the other person is saying before you reply.","Example: a teammate says the group is not passing enough. Instead of arguing, ask, “Which moments do you think we missed a pass?” Then discuss a specific improvement."]},{"h":"Communicate clearly and respectfully","p":["Use simple, specific language. Explain what happened, what you need and what you suggest. Speak about actions rather than attacking someone’s character. Choose a suitable time and place for difficult conversations.","A useful pattern is: “When [specific situation] happens, it affects [impact]. Could we try [clear request]?” Example: “When the meeting starts late, we run out of time. Could we agree to begin at four?”"]},{"h":"Work as a team","p":["A team works better when people understand the shared goal, roles and expectations. Share tasks fairly, keep commitments and tell the group early if you need help. Give credit to other people’s contributions.","Example: for a school presentation, one person researches, one organizes slides, one checks facts and one presents. Everyone reviews the final work so the result feels joined-up."]},{"h":"Solve disagreements constructively","p":["Pause if emotions are high. Describe the problem without insults, listen to each side, identify what both people need and agree on a practical next step. If someone is threatening, bullying or making you feel unsafe, seek help from a trusted adult rather than trying to handle it alone.","Example: two teammates want the same role. They can discuss the skills needed, try rotating roles during practice and ask the coach to make a fair decision."]}],"mistakes":["Interrupting before understanding the issue.","Using insults or blaming language.","Taking all the tasks or refusing to help.","Keeping quiet about a problem until it becomes bigger.","Trying to resolve unsafe situations without trusted support."],"gloss":[["Active listening","Paying attention and checking that you understood."],["Compromise","An agreement where people adjust some preferences to move forward."],["Responsibility","Following through on an agreed task."],["Feedback","Information that can help improve a piece of work or an action."]],"assign":["Practise summarizing someone's point before giving your own view.","Write a respectful message asking a group to agree on roles and a deadline.","Describe a disagreement and list two fair ways to resolve it."],"quiz":[{"q":"What is a useful first step in a disagreement?","o":["Interrupt and blame","Listen and clarify the issue","Post about it publicly"],"a":1,"why":"Understanding the issue helps people find a fair next step."},{"q":"Which sentence focuses on a practical request?","o":["You are always useless","Could we agree to start at four?","Nobody likes working with you"],"a":1,"why":"A specific request is easier to discuss and act on."},{"q":"What should you do if a situation feels unsafe?","o":["Handle it alone at all costs","Seek help from a trusted adult","Escalate the argument"],"a":1,"why":"Safety comes first; get support from someone responsible."}]},
+{"id":"m15","title":"Personal organization: time, money basics and digital safety","intro":"Learn simple habits for managing your time, making thoughtful spending choices and protecting yourself online. These are starter skills, not a substitute for advice from a trusted adult or qualified professional.","sections":[{"h":"Plan your time realistically","p":["Write down important commitments such as school, rest, family responsibilities and activities. Break a large task into smaller steps and choose a realistic time for each. Leave some space for unexpected changes.","Example: instead of writing “study science,” write “read pages 10–15, make five notes and answer three practice questions.” A clear task is easier to begin and finish.","A plan should support a balanced routine. Sleep, meals, breaks, movement and time with people matter too. If a plan repeatedly feels impossible, reduce the task or ask for help rather than blaming yourself."]},{"h":"Understand money choices","p":["A budget is a simple plan for money coming in and money going out. List needs, optional wants and savings goals. Before buying something, compare the total cost, quality, usefulness and whether you can afford it without borrowing.","Example: if you receive a small allowance, you might set aside part for transport or school needs, part for a planned treat and part for a savings goal. The amounts should fit your real situation; there is no one correct percentage.","Be cautious with offers promising quick money, guaranteed returns or prizes if you pay first. Do not share banking details, passwords or one-time codes. Ask a trusted adult before making unfamiliar online purchases or financial decisions."]},{"h":"Protect your accounts and information","p":["Use a different strong password for each important account and turn on two-step verification where available. Never share passwords, login codes, home address, school details or private documents with strangers. Check privacy settings and think before posting.","Watch for scams that create urgency, pretend to be a friend or ask you to click an unexpected link. Verify requests through a separate trusted channel. If a message worries you, do not respond immediately; show it to a trusted adult.","Be respectful online. Ask permission before sharing someone else's photo or private message. Block and report accounts that harass or threaten you, and seek help from a trusted adult."]},{"h":"Make decisions and review progress","p":["For a choice, define the problem, list realistic options, think about likely consequences and ask for advice when the stakes are high. Choose a small next step, then review what happened.","Example: if you have two assignments due, check deadlines and how long each may take. Start with the urgent task or the smaller step that helps you get moving, then review your plan.","Your plan can change. Reviewing it is a way to learn, not a reason to judge yourself."]}],"mistakes":["Making a schedule with no time for rest or changes.","Spending without checking the total cost.","Trusting a message because it looks urgent or familiar.","Sharing passwords or verification codes.","Believing that every online offer promising quick money is genuine."],"gloss":[["Budget","A plan for money received and money spent."],["Need","Something important for everyday life or a responsibility."],["Want","Something desirable but not essential."],["Two-step verification","An extra sign-in check beyond a password."],["Phishing","A deceptive message designed to steal information or access."]],"assign":["Create a realistic one-week plan that includes school, responsibilities, rest and an activity you enjoy.","Make a sample budget for an imaginary amount of pocket money, separating needs, wants and a savings goal.","Write five rules you will follow to protect your accounts and personal information."],"quiz":[{"q":"What makes a time plan more useful?","o":["It includes realistic tasks and breaks","It schedules every minute with no flexibility","It ignores important commitments"],"a":0,"why":"Realistic plans leave room for rest and unexpected changes."},{"q":"What should you do with an unexpected request for a login code?","o":["Send it quickly","Keep it private and verify the request","Post it in a group"],"a":1,"why":"Login codes should never be shared with another person."},{"q":"What is a budget for?","o":["Planning money coming in and going out","Guaranteeing that you become wealthy","Avoiding all spending"],"a":0,"why":"A budget helps you understand and plan spending."}]}
+];
+
+/* ---------- state ---------- */
+function seed(){return{
+ modules:LESSONS.map(function(l){return{id:l.id,live:true,free:l.id==="m1"}}),
+ flags:{guestAI:false},
+ tiers:[{id:"t1",name:"Monthly",price:"$7.99",per:"month"}],
+ progress:{},ai:[0,0,0,0,0,0,0],aiTotal:0,settings:{mode:"comfortable",theme:"light",font:"manrope",textSize:"medium",animatedBg:true,answerLength:"standard",startingMode:"balanced",suggestions:true},account:{displayName:"",email:""},
+}}
+var D;
+try{var raw=localStorage.getItem(KEY);D=raw?JSON.parse(raw):null}catch(e){D=null}
+if(!D||!D.modules){D=seed()}
+LESSONS.forEach(function(l){if(!D.modules.some(function(m){return m.id===l.id}))D.modules.push({id:l.id,live:true,free:false})});
+D.tiers=[{id:"t1",name:"Monthly",price:"$7.99",per:"month"}];save();
+D.settings=D.settings||{};var settingDefaults={mode:"comfortable",theme:"light",font:"manrope",textSize:"medium",animatedBg:true,answerLength:"standard",startingMode:"balanced",suggestions:true};Object.keys(settingDefaults).forEach(function(k){if(D.settings[k]===undefined)D.settings[k]=settingDefaults[k]});
+if(!D.settings.mode)D.settings.mode="comfortable";D.account=D.account||{displayName:"",email:""};D.flags=D.flags||{guestAI:false};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+var S={view:"home",as:"guest",lesson:null,qa:{},mode:(D.settings.startingMode||"balanced"),chat:[],rp:null,guestUsed:0};
+S.settingsTab="appearance";
+S.chat.push({r:"ai",t:"Hi, I'm the platform's built-in assistant. Tell me what you want to learn: clipping, CapCut, sports and their rules, teamwork, communication, time planning, money basics, digital safety, copyright or digital products. Beginner level is fine."});
+
+/* ---------- access rules ---------- */
+function canAccess(role,view){return ["home","lessons","assistant","plans","settings"].indexOf(view)>=0;}
+function aiLevel(role){return role==="subscriber"?"full":D.flags.guestAI?"limited":"locked";}
+function routeFor(role,view){return canAccess(role,view)?view:"notfound"}
+function navFor(role){return [{id:"home",t:"Home",i:"home"},{id:"lessons",t:"Lessons",i:"book"},{id:"assistant",t:"AI Assistant",i:"chat"},{id:"plans",t:"Plans",i:"tag"},{id:"settings",t:"Settings",i:"settings"}]}
+function canOpen(role,id){
+  var m=D.modules.filter(function(x){return x.id===id})[0];
+  if(!m||!m.live)return false;
+  return role==="subscriber"||!!m.free;
+}
+function toast(t){var el=document.getElementById("toast");el.textContent=t;el.className="on";clearTimeout(toast.h);toast.h=setTimeout(function(){el.className=""},2200)}
+function lesson(id){return LESSONS.filter(function(l){return l.id===id})[0]}
+function mod(id){return D.modules.filter(function(m){return m.id===id})[0]}
+
+/* ---------- assistant engine ---------- */
+var TOPICS={
+clip:{body:"Start with one idea: a clip is one moment with a setup and a payoff.\n1. Watch the long video once and note timestamps of spikes: a crash, a funny line, a close escape.\n2. Cut 15 to 40 seconds around one moment.\n3. Put the most surprising frame or line in the first 2 seconds.\nGTA-style example: a police chase that ends with a jump over the river. Open on the jump, then show how it started.\nUse free tools first, like CapCut's free tier. Results vary, so judge by your own watch-time numbers.",
+ assign:"Mark 3 timestamps in one 10-minute gameplay video you have permission to use.",check:"In your own words, why does the hook go in the first 2 seconds?",why:"Feeds let people swipe instantly, so the first seconds decide who stays."},
+capcut:{body:"Here is a simple CapCut routine.\n1. Trim silence and slow starts.\n2. Add auto captions, then fix mistakes by hand. Keep 3 to 5 words on screen.\n3. Add a zoom, cut or sound every 2 to 3 seconds.\n4. Write a hook line over the first frame.\nExample: a failed heist clip. Hook over the first frame, cut the 4-second loading wait, zoom on the explosion.",
+ assign:"Edit one clip with captions and a hook line, then compare it to the raw version.",check:"What are two things you removed or added to keep people watching?",why:"Each change removes a reason to leave or adds a reason to stay."},
+price:{body:"Pricing steps for a beginner.\n1. Decide what one unit is, such as one clip up to 45 seconds.\n2. Set a starting price you can live with and state what is included: clips, revisions, deadline.\n3. Ask for a deposit before you start.\n4. If a client says it is too much, offer fewer clips for their budget instead of cutting your rate.\nExample: 10 clips at one price becomes 5 clips at half the price.\nI can't promise what any client will pay. Test with real conversations.",
+ assign:"Write your offer in 3 lines: what they get, the price, the deadline.",check:"What would you say if a client asks for a 50% discount?",why:"Adjusting scope keeps trust and lets both sides say yes."},
+client:{body:"A message that gets replies is short and specific.\n1. Mention one real moment from their content.\n2. Attach a short sample.\n3. Ask one easy question.\nExample for WhatsApp: Hi Tolu, I watched your last stream. The moment at 41:10 would make a strong short. Here is a 20-second sample. Want me to cut 5 more?\nSend to a small list first and track who replies. Practice the conversation with a friend or by writing both sides of the exchange.",
+ assign:"Write 3 messages for 3 creators. Each mentions one real moment.",check:"Which line in your message proves you actually watched their content?",why:"Specific messages feel personal, so they get read."},
+copy:{body:"Copyright basics for clippers (general education, not legal advice).\n1. Prefer your own footage or footage with written permission.\n2. Read the game publisher's content policy.\n3. Read each platform's reused-content rules.\n4. Save screenshots of permissions with dates.\nExample: a streamer replies yes on WhatsApp. Screenshot it and file it.",
+ assign:"Find the content policy for one game and write 3 rules in your own words.",check:"What would you show someone who questioned a clip's source?",why:"Proof of permission protects you and the creator."},
+product:{body:"Make a small digital product.\n1. Choose one narrow problem you can already solve.\n2. Build the smallest useful version, like a one-page checklist PDF.\n3. Test interest by posting about it before you build more.\n4. Sell it on a free-to-start store with a plain description.\nExample: Clip Hook Checklist, 12 fields in a PDF.\nUse Canva or Google Docs for the design.",
+ assign:"Write one sentence: who it helps and what changes for them.",check:"Why start with the smallest version?",why:"It gets feedback fast and costs little to fix."},
+course:{body:"Outline a mini course.\n1. Write the end result: after this course the student can cut and post a 30-second GTA clip.\n2. List 5 lessons that move from zero to that result.\n3. Give each lesson one task and one question.\n4. Record or write the first lesson only, then ask 3 people to try it.\nExample modules: pick moments, cut, hook, caption, post.",
+ assign:"Write your end result and 5 lesson titles.",check:"What task will the student do after lesson 1?",why:"Course outcomes keep lessons focused, and tasks prove learning."},
+conf:{body:"Confidence comes from preparation and listening.\n1. Write your first sentence ahead of time.\n2. Ask one question and let them finish.\n3. Repeat their goal in your own words.\n4. Offer one clear next step.\nExample: So you want 10 clips a week from your streams, is that right?\nPractice out loud three times before a real call.",
+ assign:"Say your 2-sentence intro out loud 3 times, then once to a friend.",check:"What is the benefit of repeating the other person's goal back?",why:"People feel understood, which lowers tension and builds trust."},
+platform:{body:"High-level, a subscription platform has four parts.\n1. Accounts: guest and active subscriber.\n2. Plans and payments: decide who is paid up and until when.\n3. Access checks: every page asks who you are before showing content, and the server confirms it.\n4. A secure platform management layer maintains lesson access and subscription records.\nThe AI assistant is the premium feature on top.",
+ assign:"Sketch your own platform: what you teach, what is free, what is locked.",check:"Where must the real access check happen?",why:"The browser can be edited by anyone, so only the server can be trusted."},
+hi:{body:"Hello. What would you like to learn first: clipping, CapCut, finding clients, pricing, copyright, digital products, courses or confidence?",assign:"",check:"",why:""},
+other:{body:"I can teach these one at a time: clipping, CapCut, finding clients, pricing, copyright, digital products, courses, confidence, and how this platform works.\nPick one and tell me your level. Beginner is fine.",assign:"",check:"",why:""}
+};
+function topic(t){t=t.toLowerCase();
+ if(/^\s*(hi|hello|hey)\b/.test(t))return"hi";
+ if(/price|pricing|negotiat|rate|charge|paid|payment|deposit/.test(t))return"price";
+ if(/client|dm|whatsapp|outreach|message|email/.test(t))return"client";
+ if(/capcut|caption|subtitle|edit/.test(t))return"capcut";
+ if(/hook|retention|watch time|gta|clip|viral|short/.test(t))return"clip";
+ if(/copyright|strike|rules|permission|dmca/.test(t))return"copy";
+ if(/ebook|pdf|template|digital product|toolkit/.test(t))return"product";
+ if(/course|outline|module|curriculum/.test(t))return"course";
+ if(/confiden|nervous|shy|afraid|persuad|listen|communicat/.test(t))return"conf";
+ if(/platform|subscription|paywall|management|build|website/.test(t))return"platform";
+ return"other";
+}
+function compose(text,mode){
+  var T=TOPICS[topic(text)];var out=T.body;
+  var length=D.settings.answerLength||"standard";
+  if(length==="short")out=out.split("\n").slice(0,4).join("\n");
+  if((mode==="deep"||length==="detailed")&&T.why)out+="\n\n**Why it works:** "+T.why;
+  if(length!=="short"&&T.assign)out+="\n\n**Assignment:** "+T.assign;
+  if(length==="detailed"&&T.check)out+="\n\n**Check:** "+T.check;
+  return out;
+}
+function roleplay(text){
+  if(!S.rp){S.rp={};return"Roleplay started. I'm a client. Reply to my first message.\n\n**Client:** Hi, I saw your clips. How much for 10 clips from my GTA stream? I need them by Friday."}
+  var ok=[],no=[];
+  (/[?]/.test(text)?ok:no).push("You asked a question to learn what they need");
+  (/[$£€₦]\s?\d|\d+\s?(usd|naira|dollars|per clip)|price|rate|cost/i.test(text)?ok:no).push("You stated a price");
+  (/friday|deadline|days?|delivery|deliver|by /i.test(text)?ok:no).push("You mentioned timing");
+  (/deposit|50%|upfront|half/i.test(text)?ok:no).push("You asked for a deposit");
+  (/hi|hello|thanks|thank you|hey/i.test(text)?ok:no).push("You were friendly");
+  S.rp=null;
+  return"**Roleplay feedback**\nDid well: "+(ok.length?ok.join("; "):"nothing yet")+".\nMissing: "+(no.length?no.join("; "):"nothing, nice work")+".\n\n**Sample reply:** Hi! Thanks for reaching out. Quick question: what length and style do you want? 10 clips by Friday works for me at $X per clip with a 50% deposit. Shall I send an invoice?\n\nSend any message to start a new round.";
+}
+function modesFor(role){return role==="subscriber"?["balanced","direct","deep"]:["balanced"]}
+
+/* ---------- views ---------- */
+function vHeader(){
+  var b=S.as==="subscriber"?'<span class="badge sub">SUBSCRIBER ACCESS</span>':'<span class="badge guest">GUEST PREVIEW</span>';
+  return '<header class="top"><div class="brand"><i>CF</i><span>CLIPFORGE <span style="color:#ff8062">/</span> ACADEMY</span></div>'+b+'</header>';
+}
+function vNav(){
+  var items=navFor(S.as),h="";
+  items.forEach(function(n){h+='<button data-act="go" data-v="'+n.id+'" '+(S.view===n.id?'aria-current="page"':"")+'>'+ic(n.i,17)+n.t+'</button>';});
+  return '<nav class="nav" aria-label="Main">'+h+'</nav>';
+}
+function vHome(){
+  var done=Object.keys(D.progress).filter(function(k){return D.progress[k]}).length;
+  var pct=Math.round(done/LESSONS.length*100);
+  var h='<section class="card hero"><div class="hero-copy"><span class="eyebrow">THE CREATOR EDITING LAB · SEASON 01</span><h1>Make every second <em>count.</em></h1><p>A practical academy for creative skills and everyday life. Learn editing, explore sports, strengthen communication, build useful habits and grow your confidence through hands-on lessons.</p><div class="hero-actions"><button class="btn" data-act="go" data-v="lessons">Explore the curriculum ↗</button><button class="btn sec" data-act="go" data-v="plans">'+(S.as==="subscriber"?'Your subscription':'Unlock all lessons')+'</button></div><div class="hero-meta"><span><b>'+LESSONS.length+'</b> focused lessons</span><span><b>Hands-on</b> assignments</span><span><b>Creator-first</b> learning</span></div></div><div class="video-frame" aria-label="16 by 9 course trailer preview"><div class="video-grid"><span></span><span></span><span></span><span></span></div><div class="video-center"><div class="play">▶</div></div><div class="video-caption"><span>CLIPFORGE ORIGINALS</span><span>16:9 · COURSE PREVIEW</span></div></div></section>';
+  h+='<section class="stat-grid"><div class="stat"><strong>'+LESSONS.length+'</strong><span>PRACTICAL SKILL LESSONS</span></div><div class="stat"><strong>'+done+' / '+LESSONS.length+'</strong><span>LESSONS COMPLETED</span></div><div class="stat"><strong>'+(S.as==="subscriber"?'FULL':'PREVIEW')+'</strong><span>YOUR ACCESS</span></div></section>';
+  h+='<section class="card"><div class="section-head"><div><span class="label">THE LEARNING PATH</span><h2>From first cut to creator business</h2></div><button class="btn sec sm" data-act="go" data-v="lessons">View all lessons ↗</button></div><div class="progress-track"><i style="width:'+pct+'%"></i></div><p class="small mute">'+pct+'% of the curriculum marked complete · '+done+' of '+LESSONS.length+' lessons</p><div class="list">'+LESSONS.map(function(l,i){var ok=canOpen(S.as,l.id);return '<div class="course-row"><span class="course-num">'+String(i+1).padStart(2,'0')+'</span><div><strong>'+esc(l.title)+'</strong><p>'+readMin(l)+' min · '+l.sections.length+' learning chapters · practical task</p></div><span class="pill '+(D.progress[l.id]?'ok':ok?'mute':'gold')+'">'+(D.progress[l.id]?'COMPLETED':ok?'AVAILABLE':'LOCKED')+'</span></div>'}).join('')+'</div></section>';
+  h+='<section><div class="section-head" style="margin:0 2px 13px"><div><span class="label">WHY CLIPFORGE</span><h2>More than tutorials. A creative system.</h2></div></div><div class="feature-grid"><article class="feature"><span class="glyph">✂</span><strong>Craft the edit</strong><p>Learn pacing, framing, hooks, captions and sound through clear, practical lessons.</p></article><article class="feature"><span class="glyph">↗</span><strong>Build your edge</strong><p>Develop a portfolio, communicate with creators and approach projects professionally.</p></article><article class="feature"><span class="glyph">⌘</span><strong>Think like a builder</strong><p>Explore digital products, pricing, audience trust and sustainable creator workflows.</p></article></div></section>';
+  return h;
+}
+function vLessons(){
+  if(S.lesson){return vLesson(S.lesson)}
+  var h='<section class="card"><span class="label">THE CLIPFORGE CURRICULUM</span><h1>Build your creator toolkit.</h1><p class="mute">Twelve focused lessons. Clear explanations, practical assignments and knowledge checks designed to move you from learning to making.</p></section><div class="list">';
+  LESSONS.forEach(function(l,i){
+    var m=mod(l.id),ok=canOpen(S.as,l.id),done=D.progress[l.id];
+    if(!m.live)return;
+    h+='<button class="item" style="text-align:left;width:100%" data-act="openLesson" data-id="'+l.id+'"><div><strong>'+(i+1)+'. '+esc(l.title)+'</strong><div class="small mute">'+readMin(l)+' min read'+(m.free?' · free preview':'')+(!m.live?' · hidden from customers':'')+'</div></div>'+
+     (done?'<span class="pill ok">DONE</span>':ok?'<span class="pill mute">OPEN</span>':'<span class="pill gold">'+ic("lock",11)+' LOCKED</span>')+'</button>';
+  });
+  return h+'</div>';
+}
+function wc(x){return String(x).split(/\s+/).length}
+function lessonWords(l){
+  var n=wc(l.intro);
+  l.sections.forEach(function(s){n+=wc(s.h);["p","l","ul","ol"].forEach(function(k){(s[k]||[]).forEach(function(x){n+=wc(x)})});if(s.ex)n+=wc(s.ex)});
+  ["mistakes","assign"].forEach(function(k){(l[k]||[]).forEach(function(x){n+=wc(x)})});
+  l.gloss.forEach(function(g){n+=wc(g[0])+wc(g[1])});
+  return n;
+}
+function readMin(l){return Math.max(1,Math.round(lessonWords(l)/200))}
+function vLesson(id){
+  var l=lesson(id);
+  if(!canOpen(S.as,id)){return '<section class="card lock">'+ic("lock",34)+'<h2>This lesson is for subscribers</h2><p class="mute">Subscribe to unlock all lessons and the AI assistant.</p><div class="row"><button class="btn" data-act="go" data-v="plans">See plans</button><button class="btn sec" data-act="backLessons">Back</button></div></section>'}
+  var q=l.quiz;
+  var h='<section class="card read"><button class="btn sec sm" style="justify-self:start" data-act="backLessons">← All lessons</button><span class="label">'+readMin(l)+' min read · '+l.sections.length+' parts · '+l.assign.length+' assignments · '+q.length+' questions</span><h1>'+esc(l.title)+'</h1><p class="lead">'+esc(l.intro)+'</p>'+
+   '<div class="box"><strong>In this lesson</strong><ol class="steps">'+l.sections.map(function(s){return '<li>'+esc(s.h)+'</li>'}).join("")+'</ol></div></section>';
+  l.sections.forEach(function(s,i){
+    h+='<section class="card read"><h2>'+(i+1)+'. '+esc(s.h)+'</h2>';
+    (s.p||[]).forEach(function(p){h+='<p>'+esc(p)+'</p>'});
+    var li=s.ul||s.l;
+    if(li)h+='<ul class="steps">'+li.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul>';
+    if(s.ol)h+='<ol class="steps">'+s.ol.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ol>';
+    if(s.ex)h+='<div class="box">'+fmt(s.ex)+'</div>';
+    h+='</section>';
+  });
+  h+='<section class="card read"><h2>Common mistakes to avoid</h2><ul class="steps">'+l.mistakes.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul></section>';
+  h+='<section class="card read"><h2>Key words</h2><dl class="gl">'+l.gloss.map(function(g){return '<div><dt>'+esc(g[0])+'</dt><dd>'+esc(g[1])+'</dd></div>'}).join("")+'</dl></section>';
+  h+='<section class="card read"><h2>Your assignments</h2><div class="box as"><ol class="steps">'+l.assign.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ol></div><p class="small mute">Do these in order. Come back when you have finished them.</p></section>';
+  var right=0,done=0;
+  l.quiz.forEach(function(qq,qi){var a=S.qa[id+"_"+qi];if(a!=null){done++;if(a===qq.a)right++}});
+  h+='<section class="card read"><div class="row sp"><h2>Check your understanding</h2><span class="score">'+right+' / '+q.length+' correct</span></div>';
+  q.forEach(function(qq,qi){
+    var ans=S.qa[id+"_"+qi];
+    h+='<div class="quiz"><strong>'+(qi+1)+'. '+esc(qq.q)+'</strong>'+qq.o.map(function(o,i){var c=ans==null?"":(i===qq.a?"right":(i===ans?"wrong":""));return '<button class="'+c+'" data-act="answer" data-id="'+id+'" data-q="'+qi+'" data-i="'+i+'">'+esc(o)+'</button>'}).join("")+(ans!=null?'<p class="small" style="margin-top:8px">'+(ans===qq.a?"Correct. ":"Not quite. ")+esc(qq.why)+'</p>':'')+'</div>';
+  });
+  h+='</section><section class="card"><div class="row"><button class="btn" data-act="complete" data-id="'+id+'">'+(D.progress[id]?"Mark as not done":"Mark complete")+'</button><button class="btn sec" data-act="backLessons">Back to lessons</button></div></section>';
+  return h;
+}
+function vAssistant(){
+  var lvl=aiLevel(S.as);
+  if(lvl==="locked"){return '<section class="card lock">'+ic("lock",34)+'<h2>The AI assistant is a subscriber feature</h2><p class="mute">Get step-by-step coaching, scripts, role-play and assignments.</p><button class="btn" data-act="go" data-v="plans">See plans</button></section>'}
+  var modes=modesFor(S.as);
+  if(modes.indexOf(S.mode)<0)S.mode="balanced";
+  var h='<section class="card"><div class="row sp"><h1>AI Assistant</h1>'+(lvl==="limited"?'<span class="pill mute">'+(3-S.guestUsed)+' free messages left</span>':'<span class="pill ok">FULL ACCESS</span>')+'</div>'+
+   '<div class="tabs" role="group" aria-label="Mode">'+modes.map(function(m){return '<button data-act="mode" data-m="'+m+'" aria-pressed="'+(S.mode===m)+'">'+m+'</button>'}).join("")+'</div>'+
+   (D.settings.suggestions?'<div class="suggestion-row"><button data-act="suggest" data-text="How do I make a stronger video hook?">Improve my hooks</button><button data-act="suggest" data-text="Help me plan a beginner editing portfolio.">Build a portfolio</button><button data-act="suggest" data-text="Explain copyright basics for editing clips.">Copyright basics</button></div>':'')+'<div class="chat" id="chat">'+S.chat.map(function(m){return '<div class="msg '+(m.r==="me"?"me":"ai")+'">'+fmt(m.t)+'</div>'}).join("")+'</div>'+
+   '<form data-form="chat" class="row" style="flex-wrap:nowrap"><input type="text" id="chatIn" placeholder="Ask about clipping, clients, pricing..." autocomplete="off"><button class="btn" type="submit">Send</button></form>'+
+   '<p class="small mute">Prototype engine: replies come from built-in lesson rules until a real AI model is connected.</p></section>';
+  return h;
+}
+function vPlans(){
+  var email=(D.account&&D.account.email)||"";
+  return '<section class="card"><span class="label">MEMBERSHIP</span><h1>Get full access to Clipforge Academy</h1><p class="mute">One simple monthly membership unlocks all '+LESSONS.length+' lessons, assignments, progress tracking and the full AI assistant.</p>'+
+  '<div class="setting" style="max-width:520px"><label for="checkout-email">Your email address</label><input id="checkout-email" type="email" autocomplete="email" placeholder="you@example.com" value="'+esc(email)+'" required><small>Enter an email address you can access. Paystack will use it for your payment receipt and subscription.</small></div></section>'+
+  '<section class="card"><span class="label">MONTHLY MEMBERSHIP</span><div class="row" style="align-items:baseline;gap:8px"><h2 style="font-size:2.2rem">$7.99</h2><span class="mute">USD / month</span></div><p class="mute">Billed monthly. Your subscription renews each month until cancelled through the payment provider.</p><ul class="steps"><li>All '+LESSONS.length+' academy lessons</li><li>Full AI learning assistant</li><li>Assignments and progress tracking</li><li>New lesson updates while subscribed</li></ul><button class="btn" style="width:100%;max-width:320px" data-act="checkout" data-plan="monthly">Pay $7.99 with Paystack ↗</button><p class="small mute">You will be redirected to Paystack to complete payment securely. Clipforge Academy does not collect or store your card details.</p></section>'+
+  '<section class="card"><p class="small mute">After Paystack confirms your payment, Clipforge verifies it with the payment provider and activates your subscriber access automatically.</p></section>';
+}
+function selectSetting(label,key,opts,help){return '<div class="setting"><label for="pref-'+key+'">'+label+'</label><select id="pref-'+key+'" data-pref="'+key+'">'+opts.map(function(o){return '<option value="'+o[0]+'" '+(D.settings[key]===o[0]?'selected':'')+'>'+o[1]+'</option>'}).join('')+'</select>'+(help?'<small>'+help+'</small>':'')+'</div>'}
+function vSettings(){
+ var st=D.settings;
+ var h='<section class="card"><span class="label">YOUR WORKSPACE</span><h1>Settings</h1><p class="mute">Make Clipforge feel right for the way you learn. Your preferences are saved in this browser.</p><div class="settings-tabs"><button data-act="settingsTab" data-tab="appearance" aria-pressed="'+((S.settingsTab||'appearance')==='appearance')+'">Appearance</button><button data-act="settingsTab" data-tab="assistant" aria-pressed="'+(S.settingsTab==='assistant')+'">Assistant</button><button data-act="settingsTab" data-tab="account" aria-pressed="'+(S.settingsTab==='account')+'">Your account</button></div></section>';
+ var tab=S.settingsTab||'appearance';
+ if(tab==='appearance'){
+  h+='<section class="card"><h2>Appearance and accessibility</h2><p class="small mute">Choose how the academy looks and reads.</p><div class="settings-grid">'+
+   selectSetting('Display mode','mode',[['comfortable','Comfortable'],['compact','Compact']])+
+   selectSetting('Color theme','theme',[['dark','Dark'],['light','Light'],['system','Use device setting']])+
+   selectSetting('Font','font',[['manrope','Manrope · default'],['system','System sans-serif'],['serif','Serif'],['mono','Monospace']])+
+   selectSetting('Text size','textSize',[['small','Small'],['medium','Medium'],['large','Large'],['xlarge','Extra large']])+
+   '<div class="setting"><div class="setting-row"><strong>Animated background</strong><input type="checkbox" data-pref-check="animatedBg" '+(st.animatedBg?'checked':'')+' aria-label="Animated background"></div><small>Subtle ambient movement. Automatically respects reduced-motion settings.</small></div></div><div class="row"><button class="btn sec" data-act="resetAppearance">Restore appearance defaults</button></div></section>';
+ }else if(tab==='assistant'){
+  h+='<section class="card"><h2>Assistant preferences</h2><p class="small mute">Set the response style and how a new assistant chat begins.</p><div class="settings-grid">'+
+   selectSetting('Answer length','answerLength',[['short','Short · concise'],['standard','Standard · balanced'],['detailed','Detailed · expanded']])+
+   selectSetting('Starting mode','startingMode',[['balanced','Balanced'],['direct','Direct'],['deep','Deep dive']])+
+   '<div class="setting"><div class="setting-row"><strong>Suggestion buttons</strong><input type="checkbox" data-pref-check="suggestions" '+(st.suggestions?'checked':'')+' aria-label="Suggestion buttons"></div><small>Show example questions above the chat box.</small></div></div><div class="row"><button class="btn sec" data-act="clearChat">Clear assistant conversation</button></div></section>';
+ }else if(tab==='account'){
+  h+='<section class="card"><h2>Your account</h2><div class="row sp"><span class="badge guest">'+(S.as==='subscriber'?'SUBSCRIBER':'GUEST PREVIEW')+'</span><span class="pill mute">'+(S.as==='subscriber'?'Paid access':'Free access')+'</span></div><p class="small mute">Account details are stored locally in this demo. Real sign-in, billing and account recovery need a secure backend.</p><div class="settings-grid"><div class="setting"><label for="account-name">Display name</label><input id="account-name" type="text" data-account="displayName" value="'+esc(D.account.displayName||'')+'" placeholder="Your name"></div><div class="setting"><label for="account-email">Email address</label><input id="account-email" type="email" data-account="email" value="'+esc(D.account.email||'')+'" placeholder="you@example.com"></div></div><div class="row"><button class="btn" data-act="saveAccount">Save account details</button><button class="btn sec" data-act="accountStatus">Refresh access status</button></div><div class="box"><strong>Subscription</strong><p class="small">'+(S.as==='subscriber'?'Your demo account currently has subscriber access.':'You are browsing as a guest. Subscribe from Plans to view the available options.')+'</p><button class="btn sec sm" data-act="go" data-v="plans">View plans</button></div><p class="small mute">For safety, do not enter payment card details or passwords into this demo page.</p></section>';
+ }
+ return h;
+}
+function applySettings(){var st=D.settings||{};document.documentElement.setAttribute('data-theme',st.theme||'light');document.body.classList.toggle('motion-bg',!!st.animatedBg);document.body.classList.remove('layout-compact','font-system','font-serif','font-mono','text-small','text-medium','text-large','text-xlarge');if(st.mode==='compact')document.body.classList.add('layout-compact');if(st.font&&st.font!=='manrope')document.body.classList.add('font-'+st.font);document.body.classList.add('text-'+(st.textSize||'medium'));}
+
+function vNotFound(){return '<section class="card lock"><h2>Page not found</h2><p class="mute">There is nothing at this address.</p><button class="btn" data-act="go" data-v="home">Go home</button></section>'}
+
+function render(){
+  var v=S.view,body;
+  if(v==="home")body=vHome();else if(v==="lessons")body=vLessons();else if(v==="assistant")body=vAssistant();else if(v==="plans")body=vPlans();else if(v==="settings")body=vSettings();else body=vNotFound();
+  applySettings();document.getElementById("app").innerHTML=vHeader()+'<div class="shell">'+vNav()+'<main class="main">'+body+'</main></div>';
+  var c=document.getElementById("chat");if(c)c.scrollTop=c.scrollHeight;
+}
+function go(v){
+  var r=routeFor(S.as,v);S.view=r;S.lesson=null;
+  try{if(location.hash!=="#"+v)history.replaceState(null,"","#"+v)}catch(e){}
+  render();window.scrollTo(0,0);
+}
+function sendChat(text){
+  text=text.trim();if(!text)return;
+  var lvl=aiLevel(S.as);if(lvl==="locked"){toast("Subscribe to unlock the AI assistant.");return;}
+  if(lvl==="limited"){if(S.guestUsed>=3){toast("Free preview messages used. Subscribe to continue.");return;}S.guestUsed++;}
+  S.chat.push({r:"me",t:text});S.chat.push({r:"ai",t:compose(text,S.mode)});
+  D.aiTotal++;D.ai[6]++;save();render();var i=document.getElementById("chatIn");if(i)i.focus();
+}
+async function startCheckout(planId){
+  var emailEl=document.getElementById("checkout-email");
+  var email=(emailEl&&emailEl.value||"").trim();
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast("Enter a valid email address first.");if(emailEl)emailEl.focus();return;}
+  if(planId!=="monthly"){toast("Choose the monthly membership.");return;}
+  try{
+    toast("Preparing secure Paystack checkout…");
+    var response=await fetch("/api/checkout",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,plan:planId})});
+    var result=await response.json();
+    if(!response.ok||!result.authorization_url)throw new Error(result.error||"Could not start checkout.");
+    D.account=D.account||{};D.account.email=email;save();
+    window.location.href=result.authorization_url;
+  }catch(err){toast(err.message||"Checkout could not be started. Please try again.");}
+}
+function act(a,d){
+  if(a==="go")go(d.v);
+  else if(a==="openLesson"){S.lesson=d.id;render();window.scrollTo(0,0)}
+  else if(a==="backLessons"){S.lesson=null;render()}
+  else if(a==="answer"){S.qa[d.id+"_"+d.q]=+d.i;render()}
+  else if(a==="complete"){if(!canOpen(S.as,d.id)){toast("Subscribe to unlock this lesson.");return;}D.progress[d.id]=!D.progress[d.id];save();render();toast(D.progress[d.id]?"Lesson marked complete":"Marked as not done")}
+  else if(a==="mode"){if(S.as!=="subscriber")return;S.mode=d.m;render()}
+  else if(a==="checkout"){startCheckout(d.plan)}
+  else if(a==="settingsTab"){S.settingsTab=d.tab;render()}
+  else if(a==="resetAppearance"){D.settings.mode="comfortable";D.settings.theme="light";D.settings.font="manrope";D.settings.textSize="medium";D.settings.animatedBg=true;save();render();toast("Appearance defaults restored")}
+  else if(a==="clearChat"){S.chat=[];S.chat.push({r:"ai",t:"Conversation cleared. What would you like to learn?"});render()}
+  else if(a==="saveAccount"){D.account.displayName=(document.getElementById("account-name")||{}).value||"";D.account.email=(document.getElementById("account-email")||{}).value||"";save();toast("Account details saved")}
+  else if(a==="accountStatus"){toast("Access status: "+(S.as==="subscriber"?"subscriber":"guest preview"))}
+  else if(a==="suggest"){sendChat(d.text||"")}
+}
+var app=document.getElementById("app");
+app.addEventListener("click",function(e){var t=e.target.closest("[data-act]");if(!t||t.disabled)return;act(t.getAttribute("data-act"),t.dataset)});
+app.addEventListener("change",function(e){var t=e.target;if(t.hasAttribute("data-pref")){D.settings[t.getAttribute("data-pref")]=t.value;if(t.getAttribute("data-pref")==="startingMode")S.mode=t.value;save();applySettings();toast("Preference saved")}else if(t.hasAttribute("data-pref-check")){D.settings[t.getAttribute("data-pref-check")]=t.checked;save();applySettings();render()}else if(t.hasAttribute("data-flag")){D.flags[t.getAttribute("data-flag")]=t.checked;save();toast("Feature flag saved")}});
+app.addEventListener("submit",function(e){e.preventDefault();var f=e.target.getAttribute("data-form");if(f==="chat"){var i=document.getElementById("chatIn");sendChat(i.value)}});
+window.addEventListener("hashchange",function(){var v=(location.hash||"").slice(1);if(v&&v!==S.view&&["home","lessons","assistant","plans","settings"].indexOf(v)>=0)go(v)});
+var h0=(location.hash||"").slice(1);if(["home","lessons","assistant","plans","settings"].indexOf(h0)>=0)S.view=routeFor(S.as,h0);
+render();
+fetch("/api/me",{credentials:"same-origin"}).then(function(r){return r.ok?r.json():{authenticated:false}}).then(function(account){
+  S.as=(account&&account.active)?"subscriber":"guest";
+  render();
+  var params=new URLSearchParams(location.search);
+  if(params.get("payment")==="success"&&S.as==="subscriber")toast("Payment verified. Subscriber access is now active.");
+  else if(params.get("payment")==="failed")toast("Payment was not completed. You can try again.");
+}).catch(function(){S.as="guest";render()});
+})(); 
+</script>
+
+<!-- Paystack checkout requires the Node server in the accompanying project. -->
+</body></html>
