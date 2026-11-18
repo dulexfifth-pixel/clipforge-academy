@@ -757,8 +757,10 @@ function vAssistant(){
   return h;
 }
 function vPlans(){
+  var fullName=(D.account&&D.account.displayName)||"";
   var email=(D.account&&D.account.email)||"";
   return '<section class="card"><span class="label">MEMBERSHIP</span><h1>Get full access to Clipforge Academy</h1><p class="mute">One simple monthly membership unlocks all '+LESSONS.length+' lessons, assignments, progress tracking and the full AI assistant.</p>'+
+  '<div class="setting" style="max-width:520px"><label for="checkout-name">Full name</label><input id="checkout-name" type="text" autocomplete="name" placeholder="Your full name" value="'+esc(fullName)+'" required maxlength="100"><small>Enter your first and last name.</small></div>'+
   '<div class="setting" style="max-width:520px"><label for="checkout-email">Your email address</label><input id="checkout-email" type="email" autocomplete="email" placeholder="you@example.com" value="'+esc(email)+'" required><small>Enter an email address you can access. Paystack will use it for your payment receipt and subscription.</small></div></section>'+
   '<section class="card"><span class="label">MONTHLY MEMBERSHIP</span><div class="row" style="align-items:baseline;gap:8px"><h2 style="font-size:2.2rem">$7.99</h2><span class="mute">USD / month</span></div><p class="mute">Billed monthly. Your subscription renews each month until cancelled through the payment provider.</p><ul class="steps"><li>All '+LESSONS.length+' academy lessons</li><li>Full AI learning assistant</li><li>Assignments and progress tracking</li><li>New lesson updates while subscribed</li></ul><button class="btn" style="width:100%;max-width:320px" data-act="checkout" data-plan="monthly">Pay $7.99 with Paystack ↗</button><p class="small mute">You will be redirected to Paystack to complete payment securely. Clipforge Academy does not collect or store your card details.</p></section>'+
   '<section class="card"><p class="small mute">After Paystack confirms your payment, Clipforge verifies it with the payment provider and activates your subscriber access automatically.</p></section>';
@@ -808,16 +810,19 @@ function sendChat(text){
   D.aiTotal++;D.ai[6]++;save();render();var i=document.getElementById("chatIn");if(i)i.focus();
 }
 async function startCheckout(planId){
+  var nameEl=document.getElementById("checkout-name");
   var emailEl=document.getElementById("checkout-email");
+  var fullName=(nameEl&&nameEl.value||"").trim().replace(/\s+/g," ");
   var email=(emailEl&&emailEl.value||"").trim();
+  if(fullName.length<2){toast("Enter your full name first.");if(nameEl)nameEl.focus();return;}
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast("Enter a valid email address first.");if(emailEl)emailEl.focus();return;}
   if(planId!=="monthly"){toast("Choose the monthly membership.");return;}
   try{
     toast("Preparing secure Paystack checkout…");
-    var response=await fetch("/api/checkout",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,plan:planId})});
+    var response=await fetch("/api/checkout",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({fullName:fullName,email:email,plan:planId})});
     var result=await response.json();
     if(!response.ok||!result.authorization_url)throw new Error(result.error||"Could not start checkout.");
-    D.account=D.account||{};D.account.email=email;save();
+    D.account=D.account||{};D.account.displayName=fullName;D.account.email=email;save();
     window.location.href=result.authorization_url;
   }catch(err){toast(err.message||"Checkout could not be started. Please try again.");}
 }
