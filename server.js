@@ -18,15 +18,19 @@ const COOKIE = "clipforge_session";
 const db = new Database(process.env.DB_FILE || path.join(root, "data", "clipforge.sqlite"));
 db.pragma("journal_mode = WAL");
 db.exec(`
-CREATE TABLE IF NOT EXISTS pending(reference TEXT PRIMARY KEY,email TEXT NOT NULL,amount INTEGER NOT NULL);
-CREATE TABLE IF NOT EXISTS members(email TEXT PRIMARY KEY,status TEXT NOT NULL,until TEXT,updated TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS pending(reference TEXT PRIMARY KEY,email TEXT NOT NULL,full_name TEXT NOT NULL DEFAULT '',amount INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS members(email TEXT PRIMARY KEY,full_name TEXT NOT NULL DEFAULT '',status TEXT NOT NULL,until TEXT,updated TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,email TEXT NOT NULL,expires TEXT NOT NULL);
+const pendingColumns = db.prepare("PRAGMA table_info(pending)").all().map(c => c.name);
+if (!pendingColumns.includes("full_name")) db.exec("ALTER TABLE pending ADD COLUMN full_name TEXT NOT NULL DEFAULT ''");
+const memberColumns = db.prepare("PRAGMA table_info(members)").all().map(c => c.name);
+if (!memberColumns.includes("full_name")) db.exec("ALTER TABLE members ADD COLUMN full_name TEXT NOT NULL DEFAULT ''");
 `);
 const q = {
- pending: db.prepare("INSERT INTO pending VALUES(?,?,?)"),
+ pending: db.prepare("INSERT INTO pending(reference,email,full_name,amount) VALUES(?,?,?,?)"),
  getPending: db.prepare("SELECT * FROM pending WHERE reference=?"),
  member: db.prepare("SELECT * FROM members WHERE email=?"),
- saveMember: db.prepare("INSERT INTO members VALUES(?,?,?,?) ON CONFLICT(email) DO UPDATE SET status=excluded.status,until=excluded.until,updated=excluded.updated"),
+ saveMember: db.prepare("INSERT INTO members(email,full_name,status,until,updated) VALUES(?,?,?,?,?) ON CONFLICT(email) DO UPDATE SET full_name=excluded.full_name,status=excluded.status,until=excluded.until,updated=excluded.updated"),
  session: db.prepare("INSERT INTO sessions VALUES(?,?,?)"),
  getSession: db.prepare("SELECT email FROM sessions WHERE token_hash=? AND expires>?"),
  delSession: db.prepare("DELETE FROM sessions WHERE token_hash=?")
@@ -43,8 +47,8 @@ async function paystack(endpoint, body) {
   if (!r.ok || !j.status) throw new Error(j.message || "Paystack request failed");
   return j.data;
 }
-function setMember(email, until) {
-  q.saveMember.run(email,"active",until || nextMonth(),new Date().toISOString());
+function setMember(email, fullName, until) {
+  q.saveMember.run(email,fullName || "", "active",until || nextMonth(),new Date().toISOString());
 }
 function grantSession(res,email) {
   const token = crypto.randomBytes(32).toString("base64url");
@@ -64,15 +68,15 @@ app.post("/api/paystack/webhook",express.raw({type:"application/json"}),async(re
     if(event.event==="charge.success" && event.data?.reference) {
       const p=q.getPending.get(event.data.reference);
       const v=await paystack("/transaction/verify/"+encodeURIComponent(event.data.reference));
-      if(p && v.status==="success" && v.currency==="USD" && v.amount===79900 && v.customer?.email?.toLowerCase()===p.email) setMember(p.email,v.subscription?.next_payment_date);
+      if(p && v.status==="success" && v.currency==="USD" && v.amount===p.amount && v.customer?.email?.toLowerCase()===p.email) setMember(p.email,p.full_name,v.subscription?.next_payment_date);
     }
     if(event.event==="invoice.payment_failed") {
       const email=event.data?.customer?.email?.toLowerCase();
-      if(email && q.member.get(email)) q.saveMember.run(email,"past_due",q.member.get(email).until,new Date().toISOString());
+      if(email && q.member.get(email)) { const m=q.member.get(email); q.saveMember.run(email,m.full_name,"past_due",m.until,new Date().toISOString()); }
     }
     if(event.event==="subscription.disable") {
       const email=event.data?.customer?.email?.toLowerCase();
-      if(email && q.member.get(email)) q.saveMember.run(email,"disabled",new Date().toISOString(),new Date().toISOString());
+      if(email && q.member.get(email)) { const m=q.member.get(email); q.saveMember.run(email,m.full_name,"disabled",new Date().toISOString(),new Date().toISOString()); }
     }
     res.sendStatus(200);
   } catch(e) { console.error("Webhook:",e.message); res.sendStatus(500); }
@@ -86,12 +90,14 @@ app.get("/api/health",(_req,res)=>res.json({ok:true,service:"clipforge-academy"}
 
 app.post("/api/checkout",async(req,res)=>{
   if(!SECRET || !PLAN_CODE) return res.status(503).json({error:"Paystack has not been configured on the server."});
+  const fullName=String(req.body?.fullName||"").trim().replace(/\s+/g," ");
   const email=String(req.body?.email||"").trim().toLowerCase();
+  if(fullName.length<2 || fullName.length>100) return res.status(400).json({error:"Enter your full name."});
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({error:"Enter a valid email address."});
   const reference="cf_"+crypto.randomUUID().replaceAll("-","");
   try {
-    q.pending.run(reference,email,79900);
-    const data=await paystack("/transaction/initialize",{email,amount:79900,currency:"USD",plan:PLAN_CODE,reference,callback_url:APP_URL+"/paystack/callback",metadata:{platform:"Clipforge Academy"}});
+    q.pending.run(reference,email,fullName,799);
+    const data=await paystack("/transaction/initialize",{email,amount:799,currency:"USD",plan:PLAN_CODE,reference,callback_url:APP_URL+"/paystack/callback",metadata:{platform:"Clipforge Academy",full_name:fullName}});
     res.json({authorization_url:data.authorization_url});
   } catch(e) { console.error("Checkout:",e.message); res.status(502).json({error:"Could not start Paystack checkout. Check your plan and currency settings."}); }
 });
@@ -103,7 +109,7 @@ app.get("/paystack/callback",async(req,res)=>{
   try {
     const v=await paystack("/transaction/verify/"+encodeURIComponent(ref));
     if(v.status!=="success" || v.reference!==ref || v.currency!=="USD" || v.amount!==p.amount || v.customer?.email?.toLowerCase()!==p.email) return res.redirect("/?payment=failed#plans");
-    setMember(p.email,v.subscription?.next_payment_date);
+    setMember(p.email,p.full_name,v.subscription?.next_payment_date);
     grantSession(res,p.email);
     res.redirect("/?payment=success#plans");
   } catch(e) { console.error("Verify:",e.message); res.redirect("/?payment=failed#plans"); }
@@ -115,7 +121,7 @@ app.get("/api/me",(req,res)=>{
   if(!session) return res.json({authenticated:false,active:false});
   const m=q.member.get(session.email);
   const active=!!m && m.status==="active" && (!m.until || Date.parse(m.until)>Date.now());
-  res.json({authenticated:true,active,email:session.email,plan:active?"monthly":null,access_until:active?m.until:null});
+  res.json({authenticated:true,active,email:session.email,full_name:m?.full_name||"",plan:active?"monthly":null,access_until:active?m.until:null});
 });
 app.post("/api/logout",(req,res)=>{
   const token=req.cookies?.[COOKIE]; if(token) q.delSession.run(hash(token));
